@@ -1,6 +1,6 @@
 import React from "react";
 
-export const coin = () => {
+export const coin = (fill) => {
   return (
     //     <!--
     // tags: [money, earn, salary, change, dollar]
@@ -15,7 +15,7 @@ export const coin = () => {
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#000000"
+      stroke={fill}
       strokeWidth="1.25"
       strokeLinecap="round"
       strokeLinejoin="round"

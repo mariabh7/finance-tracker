@@ -1,6 +1,6 @@
 import React from "react";
 
-export const layoutDashboard = () => {
+export const layoutDashboard = (str) => {
   return (
     /*
 tags: [grid, view, display, page, masonry]
@@ -15,7 +15,7 @@ unicode: "f02c"
       height="24"
       viewBox="0 0 24 24"
       fill="none"
-      stroke="#000000"
+      stroke={str}
       strokeWidth="1.25"
       strokeLinecap="round"
       strokeLinejoin="round"
