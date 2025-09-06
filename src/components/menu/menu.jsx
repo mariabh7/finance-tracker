@@ -27,16 +27,16 @@ export function GenUL() {
             onClick={() => {
               handlePages(item.id);
             }}
-            className={
-              active === item.id ? "activeItem" : "NvItem hover:bg-gray-100"
-            }
+            className={`lis ${
+              active === item.id ? "activeItem" : "NvItem  hover:bg-gray-100"
+            }`}
           >
             {active === item.id ? item.icon("white") : item.icon("black")}
             {item.item}
           </li>
         ))}
       </ul>
-      <div className="NvItem  justify-self-end w-full hover:bg-gray-100">
+      <div className="lis NvItem justify-self-end w-full hover:bg-gray-100">
         {settings()}
         <span>settings</span>
       </div>
