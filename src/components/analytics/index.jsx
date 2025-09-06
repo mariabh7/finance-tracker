@@ -1,7 +1,7 @@
 function Analytics() {
   return (
     <>
-      <h1 className="text-2xl capitalize">hello world</h1>
+      <h1 className="text-2xl capitalize">hello analytics</h1>
     </>
   );
 }

@@ -1,7 +1,7 @@
 function DashBoard() {
   return (
     <>
-      <h1 className="text-2xl capitalize">hello world</h1>
+      <h1 className="text-2xl capitalize">hello dash</h1>
     </>
   );
 }
