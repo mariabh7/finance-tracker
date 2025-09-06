@@ -8,13 +8,12 @@ import { layoutDashboard } from "../../ui/dashboard";
 import { settings } from "../../ui/settIcon";
 
 const NavItems = [
-  { item: "dashboard", id: "dashboard", icon: layoutDashboard },
-  { item: "transactions", id: "transactions", icon: coin },
-  { item: "budget", id: "budget", icon: chartArcs },
-  { item: "analytics", id: "analytics", icon: chartPie },
+  { item: "dashboard", id: "DashBoard", icon: layoutDashboard },
+  { item: "transactions", id: "Transactions", icon: coin },
+  { item: "budget", id: "Budget", icon: chartArcs },
+  { item: "analytics", id: "Analytics", icon: chartPie },
 ];
-export function GenUL() {
-  const [active, setActive] = useState("dashboard");
+export function GenUL({ active, setActive }) {
   function handlePages(itemId) {
     setActive(itemId);
   }
@@ -43,10 +42,10 @@ export function GenUL() {
     </div>
   );
 }
-export default function Navigation() {
+export default function Navigation({ active, setActive }) {
   return (
     <>
-      <DeskMenu />
+      <DeskMenu active={active} setActive={setActive} />
     </>
   );
 }

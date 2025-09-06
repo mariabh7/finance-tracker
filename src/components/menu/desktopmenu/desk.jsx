@@ -1,6 +1,6 @@
 import { GenUL } from "../menu";
 import { currencyDollar } from "../../../ui/dollarIcon";
-function DeskMenu() {
+function DeskMenu({ active, setActive }) {
   return (
     <div className=" h-screen w-max py-10 px-6 border-r-[1px] border-r-gray-300 flex flex-col gap-y-6 justify-normal">
       <header>
@@ -9,7 +9,7 @@ function DeskMenu() {
           <h1 className="capitalize font-medium text-2xl">finance tracker</h1>
         </div>
       </header>
-      <GenUL />
+      <GenUL active={active} setActive={setActive} />
     </div>
   );
 }
