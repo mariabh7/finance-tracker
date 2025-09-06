@@ -1,16 +1,16 @@
-import { NavItems } from "../menu";
+import { GenUL } from "../menu";
+import { currencyDollar } from "../../../ui/dollarIcon";
 function DeskMenu() {
   return (
-    <>
-      <ul>
-        {NavItems.map((item) => (
-          <li key={item.id}>
-            {item.item}
-            {item.icon()}
-          </li>
-        ))}
-      </ul>
-    </>
+    <div className=" h-screen w-max py-10 px-6 border-r-[1px] border-r-gray-300 flex flex-col gap-y-6 justify-normal">
+      <header>
+        <div className="flex justify-items-start gap-2 items-center">
+          {currencyDollar()}
+          <h1 className="capitalize font-medium text-2xl">finance tracker</h1>
+        </div>
+      </header>
+      <GenUL />
+    </div>
   );
 }
 
