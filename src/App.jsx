@@ -9,7 +9,7 @@ export default function App() {
   const Comps = { DashBoard, Transactions, Budget, Analytics };
   const ActiveComponent = Comps[active];
   return (
-    <div className="grid md:grid-cols-[40%_60%] lg:grid-cols-[20%_80%]">
+    <div className="grid  grid-cols-1 lg:grid-cols-[20%_80%]">
       <Navigation active={active} setActive={setActive} />
       {ActiveComponent ? <ActiveComponent /> : <p>not found</p>}
     </div>

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import MobMenu from "./mobilemenu/mob";
 import DeskMenu from "./desktopmenu/desk";
 import { chartArcs } from "../../ui/chartArcs";
 import { chartPie } from "../../ui/chartPie";
@@ -45,7 +46,8 @@ export function GenUL({ active, setActive }) {
 export default function Navigation({ active, setActive }) {
   return (
     <>
-      <DeskMenu active={active} setActive={setActive} />
+      <MobMenu active={active} setActive={setActive} />
+      {/* <DeskMenu active={active} setActive={setActive} /> */}
     </>
   );
 }
