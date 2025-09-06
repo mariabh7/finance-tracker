@@ -1,7 +1,15 @@
+import { NavItems } from "../menu";
 function DeskMenu() {
   return (
     <>
-      <h1 className="text-2xl capitalize">hello world</h1>
+      <ul>
+        {NavItems.map((item) => (
+          <li key={item.id}>
+            {item.item}
+            {item.icon()}
+          </li>
+        ))}
+      </ul>
     </>
   );
 }
