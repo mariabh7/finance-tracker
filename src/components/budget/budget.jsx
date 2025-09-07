@@ -26,31 +26,29 @@ function BudgetOverView() {
           <h1 className="capitalize text-lg font-medium">budget overview </h1>
         </div>
         <div>
-          <p className=" first-letter:uppercase text-base text-gray-500">
+          <p className="TextP first-letter:uppercase">
             track your spending agains your budget limit{" "}
           </p>
         </div>
       </div>
       <div className="flex justify-around gap-3">
         <div className="text-center ">
-          <h2 className="text-2xl">$3900</h2>
-          <p className="first-letter:uppercase text-base text-gray-500">
-            total Budget
-          </p>
+          <h2 className="text-3xl font-medium ">$3,900</h2>
+          <p className="TextP first-letter:uppercase">total Budget</p>
         </div>
-        <div>
-          <h2>$3800</h2>
-          <p>total spent</p>
+        <div className="text-center ">
+          <h2 className="text-3xl font-medium">$3,800</h2>
+          <p className="TextP first-letter:uppercase">total spent</p>
         </div>
-        <div>
-          <h2>$100</h2>
-          <p>remaining</p>
+        <div className="text-center ">
+          <h2 className="text-3xl font-medium">$100</h2>
+          <p className="TextP first-letter:uppercase">remaining</p>
         </div>
       </div>
-      <div>
-        <div>
-          <h3>overal budget progress</h3>
-          <p>80%</p>
+      <div className="flex justify-start gap-2 flex-col">
+        <div className="flex justify-between">
+          <h3 className="capitalize text-base">overal budget progress</h3>
+          <p className="TextP">80%</p>
         </div>
         <ProgressBar />
         {/* <progress className="bg-white rounded-full" value={50} max={100} /> */}
