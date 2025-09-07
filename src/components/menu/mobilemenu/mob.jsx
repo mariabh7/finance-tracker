@@ -1,5 +1,5 @@
-import { menuDeep } from "../../../ui/menuIcon";
-import { currencyDollar } from "../../../ui/dollarIcon";
+import { menuDeep } from "../../ui/menuIcon";
+import { currencyDollar } from "../../ui/dollarIcon";
 import { GenUL } from "../menu";
 function MobMenu({ active, setActive }) {
   return (

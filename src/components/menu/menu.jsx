@@ -1,12 +1,12 @@
 import { useState } from "react";
 import MobMenu from "./mobilemenu/mob";
 import DeskMenu from "./desktopmenu/desk";
-import { chartArcs } from "../../ui/chartArcs";
-import { chartPie } from "../../ui/chartPie";
-import { currencyDollar } from "../../ui/dollarIcon";
-import { coin } from "../../ui/coin";
-import { layoutDashboard } from "../../ui/dashboard";
-import { settings } from "../../ui/settIcon";
+import { chartArcs } from "../ui/chartArcs";
+import { chartPie } from "../ui/chartPie";
+import { currencyDollar } from "../ui/dollarIcon";
+import { coin } from "../ui/coin";
+import { layoutDashboard } from "../ui/dashboard";
+import { settings } from "../ui/settIcon";
 
 const NavItems = [
   { item: "dashboard", id: "DashBoard", icon: layoutDashboard },

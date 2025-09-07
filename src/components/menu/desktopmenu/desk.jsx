@@ -1,8 +1,8 @@
 import { GenUL } from "../menu";
-import { currencyDollar } from "../../../ui/dollarIcon";
+import { currencyDollar } from "../../ui/dollarIcon";
 function DeskMenu({ active, setActive }) {
   return (
-    <div className=" h-screen w-max py-10 px-6 border-r-[1px] border-r-gray-300 flex flex-col gap-y-6 justify-normal">
+    <div className="overflow-y-scroll   h-screen w-[25%] py-10 px-6 border-r-[1px] border-r-gray-300 flex flex-col gap-y-6 justify-normal">
       <header>
         <div className="flex justify-items-start gap-2 items-center">
           {currencyDollar()}
