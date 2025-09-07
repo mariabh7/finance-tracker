@@ -1,6 +1,29 @@
 import { chartArcs } from "../ui/chartArcs";
 import LinearProgress from "@mui/material/LinearProgress";
 import { plus } from "../ui/addIcon";
+export const Categories = [
+  {
+    item: "food and dining",
+    itemId: "1",
+    period: "monthly",
+    paid: 100,
+    total: 200,
+  },
+  {
+    item: "transport ",
+    itemId: "2",
+    period: "monthly",
+    paid: 100,
+    total: 200,
+  },
+  {
+    item: "shopping",
+    itemId: "3",
+    period: "monthly",
+    paid: 100,
+    total: 200,
+  },
+];
 function ProgressBar({ progress = 81 }) {
   return (
     <LinearProgress
@@ -57,9 +80,39 @@ function BudgetOverView() {
     </header>
   );
 }
+function SingleItem({ Sitem }) {
+  return (
+    <li
+      key={Sitem.itemId}
+      className="w-full rounded-2xl border-2 border-gray-200 p-4"
+    >
+      <div className="flex justify-between">
+        <div className="flex flex-col gap-0 w-[50%] ">
+          <h1 className="capitalize text-lg font-medium">{Sitem.item}</h1>
+          <p className="TextP first-letter:uppercase">{Sitem.period} budget </p>
+        </div>
+        <div>
+          <button>warning</button>
+          <button>a</button>
+          <button>d</button>
+        </div>
+      </div>
+      <div className="flex mt-4 flex-col gap-2 justify-start">
+        <div className="flex justify-between">
+          <p className="capitalize text-base ">
+            ${Sitem.paid} / ${Sitem.total}
+          </p>
+          <p className="text-black">80%</p>
+        </div>
+        <ProgressBar />
+        <span className="TextP self-end">remaining</span>
+      </div>
+    </li>
+  );
+}
 function BudgetCategories() {
   return (
-    <section className="OuterStyle flex flex-col justify-start gap-6 md:gap-10">
+    <main className="OuterStyle flex flex-col justify-start gap-6 md:gap-10">
       <div className="flex justify-between items-center ">
         <div className="flex flex-col gap-1 w-[50%] ">
           <h1 className="capitalize text-lg font-medium">budget overview </h1>
@@ -73,7 +126,14 @@ function BudgetCategories() {
           </button>
         </div>
       </div>
-    </section>
+      <section>
+        <ul className="flex flex-col  gap-6">
+          {Categories.map((Category) => (
+            <SingleItem Sitem={Category} />
+          ))}
+        </ul>
+      </section>
+    </main>
   );
 }
 export default function Budget() {
