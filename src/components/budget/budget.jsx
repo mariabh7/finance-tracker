@@ -1,13 +1,15 @@
 import { chartArcs } from "../ui/chartArcs";
 import LinearProgress from "@mui/material/LinearProgress";
 import { plus } from "../ui/addIcon";
+import { edit } from "../ui/edit";
+import { trash } from "../ui/remove";
 export const Categories = [
   {
     item: "food and dining",
     itemId: "1",
     period: "monthly",
-    paid: 100,
-    total: 200,
+    paid: 100.02,
+    total: 1000,
   },
   {
     item: "transport ",
@@ -81,20 +83,21 @@ function BudgetOverView() {
   );
 }
 function SingleItem({ Sitem }) {
+  const Percentage = Math.round((Sitem.paid * 100) / Sitem.total);
   return (
     <li
       key={Sitem.itemId}
       className="w-full rounded-2xl border-2 border-gray-200 p-4"
     >
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <div className="flex flex-col gap-0 w-[50%] ">
           <h1 className="capitalize text-lg font-medium">{Sitem.item}</h1>
           <p className="TextP first-letter:uppercase">{Sitem.period} budget </p>
         </div>
-        <div>
+        <div className="flex gap-2 justify-start">
           <button>warning</button>
-          <button>a</button>
-          <button>d</button>
+          <button className="Buttons">{edit()}</button>
+          <button className="Buttons">{trash()}</button>
         </div>
       </div>
       <div className="flex mt-4 flex-col gap-2 justify-start">
@@ -102,10 +105,12 @@ function SingleItem({ Sitem }) {
           <p className="capitalize text-base ">
             ${Sitem.paid} / ${Sitem.total}
           </p>
-          <p className="text-black">80%</p>
+          <p className="text-black">{Percentage}%</p>
         </div>
-        <ProgressBar />
-        <span className="TextP self-end">remaining</span>
+        <ProgressBar progress={Percentage} />
+        <span className="text-gray-500 text-[14px] self-end">
+          ${Sitem.total - Sitem.paid} remaining
+        </span>
       </div>
     </li>
   );

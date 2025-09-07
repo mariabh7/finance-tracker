@@ -25,6 +25,10 @@ body {
     @apply w-full rounded-2xl border-2 border-gray-200 p-4 md:p-6
 }
 
+.Buttons {
+    @apply rounded-lg border-[1px] h-fit border-gray-300 p-0.5 cursor-pointer
+}
+
 .NvItem {
 
     @apply text-black;
