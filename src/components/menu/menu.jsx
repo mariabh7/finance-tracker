@@ -46,8 +46,8 @@ export function GenUL({ active, setActive }) {
 export default function Navigation({ active, setActive }) {
   return (
     <>
-      {/* <MobMenu active={active} setActive={setActive} /> */}
-      <DeskMenu active={active} setActive={setActive} />
+      <MobMenu active={active} setActive={setActive} />
+      {/* <DeskMenu active={active} setActive={setActive} /> */}
     </>
   );
 }

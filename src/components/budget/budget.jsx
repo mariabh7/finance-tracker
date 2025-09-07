@@ -91,8 +91,12 @@ function SingleItem({ Sitem }) {
     >
       <div className="flex justify-between items-center">
         <div className="flex flex-col gap-0 w-[50%] ">
-          <h1 className="capitalize text-lg font-medium">{Sitem.item}</h1>
-          <p className="TextP first-letter:uppercase">{Sitem.period} budget </p>
+          <h1 className="capitalize text-base md:text-lg font-medium">
+            {Sitem.item}
+          </h1>
+          <p className="text-gray-500 text-[14px] first-letter:uppercase">
+            {Sitem.period} budget{" "}
+          </p>
         </div>
         <div className="flex gap-2 justify-start">
           <button>warning</button>
@@ -102,10 +106,10 @@ function SingleItem({ Sitem }) {
       </div>
       <div className="flex mt-4 flex-col gap-2 justify-start">
         <div className="flex justify-between">
-          <p className="capitalize text-base ">
+          <p className="capitalize text-[14px] md:text-base ">
             ${Sitem.paid} / ${Sitem.total}
           </p>
-          <p className="text-black">{Percentage}%</p>
+          <p className="text-black text-[14px] md:text-base">{Percentage}%</p>
         </div>
         <ProgressBar progress={Percentage} />
         <span className="text-gray-500 text-[14px] self-end">
