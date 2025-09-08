@@ -8,7 +8,7 @@ export const Categories = [
     item: "food and dining",
     itemId: "1",
     period: "monthly",
-    paid: 100.02,
+    paid: 102,
     total: 1000,
   },
   {
@@ -43,7 +43,13 @@ function ProgressBar({ progress = 81 }) {
     />
   );
 }
-function BudgetOverView() {
+function BudgetOverView({ Budgets = [] }) {
+  const TotalBudget = Budgets.map((item) => item.total).reduce(
+    (sum, next) => sum + next
+  );
+  const TotalSpent = Budgets.map((item) => item.paid).reduce(
+    (sum, next) => sum + next
+  );
   return (
     <header className="OuterStyle flex flex-col justify-start gap-6 md:gap-10">
       <div className="flex flex-col gap-1 ">
@@ -59,31 +65,35 @@ function BudgetOverView() {
       </div>
       <div className="flex justify-around gap-3">
         <div className="text-center ">
-          <h2 className="text-xl md:text-3xl  font-medium ">$3,900</h2>
+          <h2 className="text-xl md:text-3xl  font-medium ">${TotalBudget}</h2>
           <p className="TextP first-letter:uppercase">total Budget</p>
         </div>
         <div className="text-center ">
-          <h2 className="text-xl md:text-3xl  font-medium">$3,800</h2>
+          <h2 className="text-xl md:text-3xl  font-medium">${TotalSpent}</h2>
           <p className="TextP first-letter:uppercase">total spent</p>
         </div>
         <div className="text-center ">
-          <h2 className=" text-xl md:text-3xl font-medium">$100</h2>
+          <h2 className=" text-xl md:text-3xl font-medium">
+            ${TotalBudget - TotalSpent}
+          </h2>
           <p className="TextP first-letter:uppercase">remaining</p>
         </div>
       </div>
       <div className="flex justify-start gap-2 flex-col">
         <div className="flex justify-between">
           <h3 className="capitalize text-base">overal budget progress</h3>
-          <p className="TextP">80%</p>
+          <p className="TextP">
+            {((TotalSpent * 100) / TotalBudget).toFixed(1)}%
+          </p>
         </div>
-        <ProgressBar />
+        <ProgressBar progress={(TotalSpent * 100) / TotalBudget} />
         {/* <progress className="bg-white rounded-full" value={50} max={100} /> */}
       </div>
     </header>
   );
 }
 function SingleItem({ Sitem }) {
-  const Percentage = Math.round((Sitem.paid * 100) / Sitem.total);
+  const Percentage = ((Sitem.paid * 100) / Sitem.total).toFixed(1);
   return (
     <li
       key={Sitem.itemId}
@@ -148,7 +158,7 @@ function BudgetCategories() {
 export default function Budget() {
   return (
     <div className="flex flex-col justify-start gap-10">
-      <BudgetOverView />
+      <BudgetOverView Budgets={Categories} />
       <BudgetCategories />
     </div>
   );
