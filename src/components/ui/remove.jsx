@@ -16,9 +16,9 @@ export const trash = () => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="#000000"
-      stroke-width="1.75"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.75"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path d="M4 7l16 0" />
       <path d="M10 11l0 6" />
