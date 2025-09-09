@@ -15,11 +15,7 @@ export default function App() {
         data-slot={`${ActiveComponent.name}`}
         className="py-10 w-full px-5 h-screen overflow-y-scroll flex flex-col justify-start gap-10"
       >
-        {ActiveComponent ? (
-          <ActiveComponent />
-        ) : (
-          <p>{import.meta.env.VITE_PORT}</p>
-        )}
+        {ActiveComponent ? <ActiveComponent /> : <p>not found</p>}
       </div>
     </div>
   );
