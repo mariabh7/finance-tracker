@@ -16,9 +16,9 @@ export const pigMoney = () => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="#b5b0b0"
-      stroke-width="1.5"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path d="M15 11v.01" />
       <path d="M5.173 8.378a3 3 0 1 1 4.656 -1.377" />

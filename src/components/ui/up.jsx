@@ -16,9 +16,9 @@ export const trendingUp = () => {
       viewBox="0 0 24 24"
       fill="none"
       stroke="#b5b0b0"
-      stroke-width="2"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     >
       <path d="M3 17l6 -6l4 4l8 -8" />
       <path d="M14 7l7 0l0 7" />

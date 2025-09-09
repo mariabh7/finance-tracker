@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import MobMenu from "./mobilemenu/mob";
 import DeskMenu from "./desktopmenu/desk";
 import { chartArcs } from "../ui/chartArcs";
@@ -49,10 +49,21 @@ export function GenUL({ active, setActive }) {
   );
 }
 export default function Navigation({ active, setActive }) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth <= 1010);
+
+    handleResize(); // Check on mount
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
   return (
     <>
-      {/* <MobMenu active={active} setActive={setActive} /> */}
-      <DeskMenu active={active} setActive={setActive} />
+      {!isMobile ? (
+        <DeskMenu active={active} setActive={setActive} />
+      ) : (
+        <MobMenu active={active} setActive={setActive} />
+      )}
     </>
   );
 }

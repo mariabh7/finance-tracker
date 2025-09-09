@@ -11,6 +11,8 @@ import Table from "@mui/material/Table";
 import { Transaction } from "../data/data";
 import { circleArrowUp } from "../ui/arrowup";
 import { circleArrowDown } from "../ui/arrowdown";
+import { getTotal } from "../data/data";
+import { updateBudget } from "../data/data";
 function TransactionsTable() {
   return (
     <>
@@ -80,7 +82,12 @@ function MainContainer() {
           </p>
         </div>
         <div>
-          <button className="border-2  h-fit flex items-center justify-start gap-1 px-3 py-2 border-black bg-black rounded-lg text-white capitalize">
+          <button
+            onClick={() => {
+              updateBudget();
+            }}
+            className="border-2  h-fit flex items-center justify-start gap-1 px-3 py-2 border-black bg-black rounded-lg text-white capitalize"
+          >
             {plus()} add transaction
           </button>
         </div>
@@ -92,15 +99,25 @@ function MainContainer() {
   );
 }
 function Transactions() {
+  const TotalIncome = getTotal(Transaction, "income");
+  const TotalExpenses = getTotal(Transaction, "expense");
   return (
     <>
       <header
         data-slot="transaction-header"
         className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
       >
-        <Card title={"income"} number={4200} description={null} />
-        <Card title={"expense"} number={1300} description={null} />
-        <Card title={"total balence"} number={4200} description={null} />
+        <Card title={"total income"} number={TotalIncome} description={null} />
+        <Card
+          title={"total expense"}
+          number={TotalExpenses}
+          description={null}
+        />
+        <Card
+          title={"total balence"}
+          number={TotalIncome - TotalExpenses}
+          description={null}
+        />
       </header>
       <MainContainer />
     </>

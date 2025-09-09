@@ -7,11 +7,11 @@ export const Categories = [
     total: 1000,
   },
   {
-    item: "transport ",
+    item: "transport",
     itemId: "2",
     period: "monthly",
     paid: 100,
-    total: 300,
+    total: 3000,
   },
   {
     item: "shopping",
@@ -34,7 +34,7 @@ export const Transaction = [
     id: 2,
     type: "expense",
     amount: 850,
-    category: "Food & Dining",
+    category: "food and dining",
     description: "Groceries and restaurants",
     date: "2024-01-02",
   },
@@ -42,7 +42,7 @@ export const Transaction = [
     id: 3,
     type: "expense",
     amount: 420,
-    category: "Transportation",
+    category: "transport",
     description: "Gas and car maintenance",
     date: "2024-01-03",
   },
@@ -63,3 +63,18 @@ export const Transaction = [
     date: "2024-01-05",
   },
 ];
+export function getTotal(array, type) {
+  return array
+    .filter((item) => item.type === type)
+    .map((item) => item.amount)
+    .reduce((sum, next) => sum + next);
+}
+export function updateBudget() {
+  for (let item of Transaction) {
+    let bud = Categories.find((ct) => ct.item == item.category);
+    if (bud) {
+      console.log(bud);
+      bud.paid = item.amount;
+    }
+  }
+}
