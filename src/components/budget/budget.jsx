@@ -136,9 +136,9 @@ function BudgetCategories() {
 }
 export default function Budget() {
   return (
-    <div className="flex flex-col justify-start gap-10">
+    <>
       <BudgetOverView Budgets={Categories} />
       <BudgetCategories />
-    </div>
+    </>
   );
 }

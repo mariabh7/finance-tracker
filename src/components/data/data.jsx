@@ -21,3 +21,45 @@ export const Categories = [
     total: 200,
   },
 ];
+export const Transaction = [
+  {
+    id: 1,
+    type: "income",
+    amount: 4200,
+    category: "Salary",
+    description: "Monthly salary",
+    date: "2024-01-01",
+  },
+  {
+    id: 2,
+    type: "expense",
+    amount: 850,
+    category: "Food & Dining",
+    description: "Groceries and restaurants",
+    date: "2024-01-02",
+  },
+  {
+    id: 3,
+    type: "expense",
+    amount: 420,
+    category: "Transportation",
+    description: "Gas and car maintenance",
+    date: "2024-01-03",
+  },
+  {
+    id: 4,
+    type: "expense",
+    amount: 920,
+    category: "Bills & Utilities",
+    description: "Electricity, water, internet",
+    date: "2024-01-04",
+  },
+  {
+    id: 5,
+    type: "income",
+    amount: 500,
+    category: "Freelance",
+    description: "Web design project",
+    date: "2024-01-05",
+  },
+];

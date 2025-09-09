@@ -11,7 +11,10 @@ export default function App() {
   return (
     <div className="flex flex-col lg:flex-row gap-5">
       <Navigation active={active} setActive={setActive} />
-      <div className="py-10 w-full px-5 h-screen overflow-y-scroll">
+      <div
+        data-slot={`${ActiveComponent.name}`}
+        className="py-10 w-full px-5 h-screen overflow-y-scroll flex flex-col justify-start gap-10"
+      >
         {ActiveComponent ? (
           <ActiveComponent />
         ) : (
