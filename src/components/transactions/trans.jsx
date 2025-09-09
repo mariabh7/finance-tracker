@@ -9,6 +9,8 @@ import TableCell from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Table from "@mui/material/Table";
 import { Transaction } from "../data/data";
+import { circleArrowUp } from "../ui/arrowup";
+import { circleArrowDown } from "../ui/arrowdown";
 function TransactionsTable() {
   return (
     <>
@@ -26,10 +28,28 @@ function TransactionsTable() {
           </TableHead>
           <TableBody sx={{ width: "100%" }}>
             {Transaction.map((trans) => {
+              const CurrentType = trans.type === "income" ? true : false;
               return (
                 <TableRow key={trans.id} className="capitalize">
-                  <TableCell>{trans.type}</TableCell>
-                  <TableCell>${trans.amount}</TableCell>
+                  <TableCell>
+                    <div
+                      className={`flex gap-2 rounded-sm w-fit items-center py-1 px-2 text-white justify-start ${
+                        CurrentType ? "bg-black" : "bg-red-700"
+                      }`}
+                    >
+                      {CurrentType ? circleArrowUp() : circleArrowDown()}
+                      {trans.type}
+                    </div>
+                  </TableCell>
+                  <TableCell>
+                    <span
+                      className={
+                        CurrentType ? "text-green-700" : "text-red-600"
+                      }
+                    >
+                      ${trans.amount}
+                    </span>
+                  </TableCell>
                   <TableCell>{trans.category}</TableCell>
                   <TableCell>{trans.description}</TableCell>
                   <TableCell>{trans.date}</TableCell>
