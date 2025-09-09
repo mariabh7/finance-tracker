@@ -36,7 +36,12 @@ export function GenUL({ active, setActive }) {
           </li>
         ))}
       </ul>
-      <div className="lis NvItem justify-self-end w-full hover:bg-gray-100">
+      <div
+        className="lis NvItem justify-self-end w-full hover:bg-gray-100"
+        onClick={() => {
+          handlePages("settings");
+        }}
+      >
         {settings()}
         <span>settings</span>
       </div>

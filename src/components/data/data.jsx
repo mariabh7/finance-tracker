@@ -3,7 +3,7 @@ export const Categories = [
     item: "food and dining",
     itemId: "1",
     period: "monthly",
-    paid: 900,
+    paid: 800,
     total: 1000,
   },
   {

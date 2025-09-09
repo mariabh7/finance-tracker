@@ -12,7 +12,11 @@ export default function App() {
     <div className="flex flex-col lg:flex-row gap-5">
       <Navigation active={active} setActive={setActive} />
       <div className="py-10 w-full px-5 h-screen overflow-y-scroll">
-        {ActiveComponent ? <ActiveComponent /> : <p>not found</p>}
+        {ActiveComponent ? (
+          <ActiveComponent />
+        ) : (
+          <p>{import.meta.env.VITE_PORT}</p>
+        )}
       </div>
     </div>
   );
