@@ -1,4 +1,6 @@
 import Card from "../ui/card";
+import { edit } from "../ui/edit";
+import { trash } from "../ui/remove";
 import { plus } from "../ui/addIcon";
 import TableBody, { tableBodyClasses } from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
@@ -27,11 +29,17 @@ function TransactionsTable() {
               return (
                 <TableRow key={trans.id} className="capitalize">
                   <TableCell>{trans.type}</TableCell>
-                  <TableCell>{trans.amount}</TableCell>
+                  <TableCell>${trans.amount}</TableCell>
                   <TableCell>{trans.category}</TableCell>
                   <TableCell>{trans.description}</TableCell>
                   <TableCell>{trans.date}</TableCell>
-                  <TableCell>del</TableCell>
+                  <TableCell>
+                    {" "}
+                    <div className="flex gap-2 justify-start">
+                      <button className="Buttons">{edit()}</button>
+                      <button className="Buttons">{trash()}</button>
+                    </div>
+                  </TableCell>
                 </TableRow>
               );
             })}
@@ -52,7 +60,7 @@ function MainContainer() {
           </p>
         </div>
         <div>
-          <button className="border-2 flex-shrink-0 h-min flex justify-start gap-1 px-3 py-2 border-black bg-black rounded-lg text-white capitalize">
+          <button className="border-2  h-fit flex items-center justify-start gap-1 px-3 py-2 border-black bg-black rounded-lg text-white capitalize">
             {plus()} add transaction
           </button>
         </div>
