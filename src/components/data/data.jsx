@@ -7,7 +7,7 @@ export const Categories = [
     total: 1000,
   },
   {
-    item: "transport",
+    item: "transportation",
     itemId: "2",
     period: "monthly",
     paid: 100,
@@ -72,6 +72,7 @@ export const Availablecategories = [
   "bills & utilities",
   "other",
 ];
+export const Plans = ["weekly", "monthly", "yearly"];
 export function getTotal(array, type) {
   return array
     .filter((item) => item.type === type)

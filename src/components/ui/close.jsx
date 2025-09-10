@@ -31,6 +31,7 @@ export default function CloseDiagonale({ open, setopen }) {
   return (
     <>
       <button
+        className="cursor-pointer"
         onClick={() => {
           closediagonale();
         }}

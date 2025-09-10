@@ -169,7 +169,6 @@ export default function Budget() {
         setOpen={setOpen}
         actualElement={Current}
       />
-      ;
     </>
   );
 }

@@ -1,10 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import Autocomplete from "@mui/material/Autocomplete";
 import { Availablecategories } from "../data/data";
 import CloseDiagonale from "./close";
+import TextField from "@mui/material/TextField";
+import FormControl from "@mui/material/FormControl";
+import Select from "@mui/material/Select";
+import MenuItem from "@mui/material/MenuItem";
+import InputLabel from "@mui/material/InputLabel";
+import { Plans } from "../data/data";
 export const edit = () => {
   return (
     //     <!--
@@ -48,17 +54,58 @@ export default function EditBudgetElement({
   setOpen,
   actualElement,
 }) {
+  const [category, setCategory] = useState(actualElement?.item);
   return (
     <Dialog open={open}>
-      <DialogTitle>{action}</DialogTitle>
-      <DialogContent>
-        <div>
-          <p>{description}</p>
-          <div>
-            <p>hello world {actualElement?.item}</p>
-            <CloseDiagonale setopen={setOpen} />
-          </div>
+      <DialogTitle>
+        <div className="flex justify-between items-center">
+          <h1 className="capitalize font-Ubuntu">{action}</h1>
+          <CloseDiagonale setopen={setOpen} />
         </div>
+      </DialogTitle>
+      <DialogContent
+        sx={{
+          width: "800px",
+          overflowX: "hidden",
+          height: "500px",
+        }}
+      >
+        <FormControl
+          sx={{
+            width: "400px",
+            marginTop: "20px",
+            flexDirection: "column",
+            display: "flex",
+            gap: "2rem",
+          }}
+        >
+          <div>
+            <InputLabel>Category</InputLabel>
+            <Select
+              value={category ? category : "no"} // 👈 current value
+              onChange={(e) => setCategory(e.target.value)}
+              label="Category"
+            >
+              {Availablecategories.map((cat) => (
+                <MenuItem key={cat} value={cat}>
+                  {cat}
+                </MenuItem>
+              ))}
+            </Select>
+          </div>
+
+          <Select
+            value={category ? category : "no"} // 👈 current value
+            onChange={(e) => setCategory(e.target.value)}
+            label="budget limit"
+          >
+            {Plans.map((cat) => (
+              <MenuItem key={cat} value={cat}>
+                {cat}
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </DialogContent>
     </Dialog>
   );
