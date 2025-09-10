@@ -51,7 +51,7 @@ export function GenUL({ active, setActive }) {
 export default function Navigation({ active, setActive }) {
   const [isMobile, setIsMobile] = useState(false);
   useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth <= 1010);
+    const handleResize = () => setIsMobile(window.innerWidth < 1024);
 
     handleResize(); // Check on mount
     window.addEventListener("resize", handleResize);

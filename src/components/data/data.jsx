@@ -11,7 +11,7 @@ export const Categories = [
     itemId: "2",
     period: "monthly",
     paid: 100,
-    total: 3000,
+    total: 300,
   },
   {
     item: "shopping",
@@ -62,6 +62,15 @@ export const Transaction = [
     description: "Web design project",
     date: "2024-01-05",
   },
+];
+export const Availablecategories = [
+  "food and dining",
+  "transportation",
+  "healthCare",
+  "entertainment",
+  "shopping",
+  "bills & utilities",
+  "other",
 ];
 export function getTotal(array, type) {
   return array

@@ -1,9 +1,10 @@
 import { chartArcs } from "../ui/chartArcs";
 import LinearProgress from "@mui/material/LinearProgress";
 import { plus } from "../ui/addIcon";
-import { edit } from "../ui/edit";
+import EditBudgetElement, { edit } from "../ui/edit";
 import { trash } from "../ui/remove";
 import { Categories } from "../data/data";
+import { useState } from "react";
 function ProgressBar({ progress = 81 }) {
   return (
     <LinearProgress
@@ -28,7 +29,8 @@ function BudgetOverView({ Budgets = [] }) {
   const TotalSpent = Budgets.map((item) => item.paid).reduce(
     (sum, next) => sum + next
   );
-  const pers = (TotalSpent * 100) / TotalBudget;
+  const pers =
+    TotalSpent > TotalBudget ? 100 : (TotalSpent * 100) / TotalBudget;
   const color = pers <= 79 ? "text-green-600" : "text-amber-600";
   return (
     <header className="OuterStyle flex flex-col justify-start gap-6 md:gap-10">
@@ -58,7 +60,7 @@ function BudgetOverView({ Budgets = [] }) {
         </div>
         <div className="text-center ">
           <h2 className=" text-xl md:text-3xl font-medium text-blue-500">
-            ${TotalBudget - TotalSpent}
+            ${TotalBudget - TotalSpent < 0 ? 0 : TotalBudget - TotalSpent}
           </h2>
           <p className="TextP first-letter:uppercase">remaining</p>
         </div>
@@ -74,8 +76,15 @@ function BudgetOverView({ Budgets = [] }) {
     </header>
   );
 }
-function SingleItem({ Sitem }) {
-  const Percentage = ((Sitem.paid * 100) / Sitem.total).toFixed(1);
+function SingleItem({ Sitem, setOpen, setCurrent }) {
+  function handlChange(Current) {
+    setCurrent(Current);
+    setOpen(true);
+  }
+  const Percentage =
+    Sitem.paid > Sitem.total
+      ? 100
+      : ((Sitem.paid * 100) / Sitem.total).toFixed(1);
   return (
     <li className="w-full rounded-2xl border-2 border-gray-200 p-4">
       <div className="flex justify-between items-center">
@@ -89,7 +98,14 @@ function SingleItem({ Sitem }) {
         </div>
         <div className="flex gap-2 justify-start">
           <button>warning</button>
-          <button className="Buttons">{edit()}</button>
+          <button
+            onClick={() => {
+              handlChange(Sitem);
+            }}
+            className="Buttons"
+          >
+            {edit()}
+          </button>
           <button className="Buttons">{trash()}</button>
         </div>
       </div>
@@ -102,13 +118,13 @@ function SingleItem({ Sitem }) {
         </div>
         <ProgressBar progress={Percentage} />
         <span className="text-gray-500 text-[14px] self-end">
-          ${Sitem.total - Sitem.paid} remaining
+          ${Sitem.paid > Sitem.total ? 0 : Sitem.total - Sitem.paid} remaining
         </span>
       </div>
     </li>
   );
 }
-function BudgetCategories() {
+function BudgetCategories({ setopen, setCurrent }) {
   return (
     <main className="OuterStyle flex flex-col justify-start gap-6 md:gap-10">
       <div className="flex justify-between items-center ">
@@ -127,7 +143,12 @@ function BudgetCategories() {
       <section>
         <ul className="flex flex-col  gap-6">
           {Categories.map((Category) => (
-            <SingleItem key={Category.itemId} Sitem={Category} />
+            <SingleItem
+              key={Category.itemId}
+              Sitem={Category}
+              setOpen={setopen}
+              setCurrent={setCurrent}
+            />
           ))}
         </ul>
       </section>
@@ -135,10 +156,20 @@ function BudgetCategories() {
   );
 }
 export default function Budget() {
+  const [open, setOpen] = useState(false);
+  const [Current, setCurrent] = useState();
   return (
     <>
       <BudgetOverView Budgets={Categories} />
-      <BudgetCategories />
+      <BudgetCategories setopen={setOpen} setCurrent={setCurrent} />
+      <EditBudgetElement
+        action={"edit budget"}
+        description={"update your budget limit"}
+        open={open}
+        setOpen={setOpen}
+        actualElement={Current}
+      />
+      ;
     </>
   );
 }

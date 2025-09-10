@@ -1,5 +1,10 @@
 import React from "react";
-
+import Dialog from "@mui/material/Dialog";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import Autocomplete from "@mui/material/Autocomplete";
+import { Availablecategories } from "../data/data";
+import CloseDiagonale from "./close";
 export const edit = () => {
   return (
     //     <!--
@@ -26,3 +31,35 @@ export const edit = () => {
     </svg>
   );
 };
+function CustimizedSelect({ optien }) {
+  return (
+    <Autocomplete
+      disablePortal
+      options={top100Films}
+      sx={{ width: 300 }}
+      renderInput={(params) => <TextField {...params} label="Movie" />}
+    />
+  );
+}
+export default function EditBudgetElement({
+  action,
+  description,
+  open = false,
+  setOpen,
+  actualElement,
+}) {
+  return (
+    <Dialog open={open}>
+      <DialogTitle>{action}</DialogTitle>
+      <DialogContent>
+        <div>
+          <p>{description}</p>
+          <div>
+            <p>hello world {actualElement?.item}</p>
+            <CloseDiagonale setopen={setOpen} />
+          </div>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}

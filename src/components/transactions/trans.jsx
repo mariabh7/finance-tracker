@@ -19,7 +19,7 @@ function TransactionsTable() {
       <TableContainer sx={{ width: "100%" }}>
         <Table>
           <TableHead sx={{ width: "100%" }}>
-            <TableRow className="capitalize" sx={{ fontWeight: "500" }}>
+            <TableRow className="capitalize" sx={{ fontWeight: "700" }}>
               <TableCell>type</TableCell>
               <TableCell>amount</TableCell>
               <TableCell>Category</TableCell>
@@ -74,7 +74,7 @@ function TransactionsTable() {
 function MainContainer() {
   return (
     <main className="OuterStyle flex flex-col justify-start gap-6 md:gap-10">
-      <div className="flex justify-between items-center ">
+      <div className="flex justify-between items-center align-baseline ">
         <div className="flex flex-col gap-1 w-[50%] ">
           <h1 className="capitalize text-lg font-medium">transactions </h1>
           <p className="TextP first-letter:uppercase">
