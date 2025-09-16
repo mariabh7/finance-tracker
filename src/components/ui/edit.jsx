@@ -70,42 +70,11 @@ export default function EditBudgetElement({
           height: "500px",
         }}
       >
-        <FormControl
-          sx={{
-            width: "400px",
-            marginTop: "20px",
-            flexDirection: "column",
-            display: "flex",
-            gap: "2rem",
-          }}
-        >
-          <div>
-            <InputLabel>Category</InputLabel>
-            <Select
-              value={category ? category : "no"} // 👈 current value
-              onChange={(e) => setCategory(e.target.value)}
-              label="Category"
-            >
-              {Availablecategories.map((cat) => (
-                <MenuItem key={cat} value={cat}>
-                  {cat}
-                </MenuItem>
-              ))}
-            </Select>
-          </div>
-
-          <Select
-            value={category ? category : "no"} // 👈 current value
-            onChange={(e) => setCategory(e.target.value)}
-            label="budget limit"
-          >
-            {Plans.map((cat) => (
-              <MenuItem key={cat} value={cat}>
-                {cat}
-              </MenuItem>
-            ))}
-          </Select>
-        </FormControl>
+        <div>
+          <select className="py-2  w-[50%] md:w-[70%]">
+            <option>{actualElement?.item}</option>
+          </select>
+        </div>
       </DialogContent>
     </Dialog>
   );

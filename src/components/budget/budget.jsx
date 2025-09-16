@@ -78,6 +78,7 @@ function BudgetOverView({ Budgets = [] }) {
 }
 function SingleItem({ Sitem, setOpen, setCurrent }) {
   function handlChange(Current) {
+    console.log(Current);
     setCurrent(Current);
     setOpen(true);
   }
