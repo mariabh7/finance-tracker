@@ -1,5 +1,6 @@
 import { chartArcs } from "../ui/chartArcs";
 import LinearProgress from "@mui/material/LinearProgress";
+import Snackbar from "@mui/material/Snackbar";
 import { plus } from "../ui/addIcon";
 import EditBudgetElement, { edit } from "../ui/edit";
 import { trash } from "../ui/remove";
@@ -23,12 +24,13 @@ function ProgressBar({ progress = 81 }) {
   );
 }
 function BudgetOverView({ Budgets = [] }) {
-  const TotalBudget = Budgets.map((item) => item.total).reduce(
+  const TotalBudget = Budgets?.map((item) => item.total)?.reduce(
     (sum, next) => sum + next
   );
-  const TotalSpent = Budgets.map((item) => item.paid).reduce(
+  const TotalSpent = Budgets?.map((item) => item.paid)?.reduce(
     (sum, next) => sum + next
   );
+
   const pers =
     TotalSpent > TotalBudget ? 100 : (TotalSpent * 100) / TotalBudget;
   const color = pers <= 79 ? "text-green-600" : "text-amber-600";
@@ -76,7 +78,29 @@ function BudgetOverView({ Budgets = [] }) {
     </header>
   );
 }
+function DeleteButton({ openSnack, setOpensnack, item }) {
+  const HandleDeleting = () => {
+    setOpensnack(true);
+    Categories.splice(Categories?.indexOf(item), 1);
+    setTimeout(() => {
+      setOpensnack(false);
+    }, 1000);
+  };
+  return (
+    <>
+      <button onClick={HandleDeleting} className="Buttons">
+        {trash()}
+      </button>
+      <Snackbar
+        open={openSnack}
+        autoHideDuration={1000}
+        message="task deleted "
+      />
+    </>
+  );
+}
 function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
+  const [openSnack, setOpensnack] = useState(false);
   function handlChange(Current) {
     setCurrent(Current);
     setDiagonaleConfig({
@@ -86,9 +110,9 @@ function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
     setOpen(true);
   }
   const Percentage =
-    Sitem.paid > Sitem.total
+    Sitem?.paid > Sitem?.total
       ? 100
-      : ((Sitem.paid * 100) / Sitem.total).toFixed(1);
+      : ((Sitem?.paid * 100) / Sitem?.total).toFixed(1);
   return (
     <li className="w-full rounded-2xl border-2 border-gray-200 p-4">
       <div className="flex justify-between items-center">
@@ -110,7 +134,11 @@ function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
           >
             {edit()}
           </button>
-          <button className="Buttons">{trash()}</button>
+          <DeleteButton
+            openSnack={openSnack}
+            setOpensnack={setOpensnack}
+            item={Sitem}
+          />
         </div>
       </div>
       <div className="flex mt-4 flex-col gap-2 justify-start">
@@ -128,7 +156,7 @@ function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
     </li>
   );
 }
-function BudgetCategories({ setopen, setCurrent, setconfig }) {
+function BudgetCategories({ budgets, setopen, setCurrent, setconfig }) {
   const handleAdding = () => {
     setCurrent({});
     setopen(true);
@@ -149,7 +177,7 @@ function BudgetCategories({ setopen, setCurrent, setconfig }) {
         <div>
           <button
             onClick={handleAdding}
-            className="border-2 flex justify-start gap-1 px-3 py-2 border-black bg-black rounded-lg text-white capitalize"
+            className="border-2 cursor-pointer flex justify-start gap-1 px-3 py-2 border-black bg-black rounded-lg text-white capitalize"
           >
             {plus()} add budget
           </button>
@@ -157,7 +185,7 @@ function BudgetCategories({ setopen, setCurrent, setconfig }) {
       </div>
       <section>
         <ul className="flex flex-col  gap-6">
-          {Categories.map((Category) => (
+          {budgets?.map((Category) => (
             <SingleItem
               key={Category.itemId}
               Sitem={Category}
@@ -179,6 +207,7 @@ export default function Budget() {
     <>
       <BudgetOverView Budgets={Categories} />
       <BudgetCategories
+        budgets={Categories}
         setopen={setOpen}
         setCurrent={setCurrent}
         setconfig={setConfig}
