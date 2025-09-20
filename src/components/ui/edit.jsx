@@ -3,22 +3,13 @@ import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import Autocomplete from "@mui/material/Autocomplete";
-import { Availablecategories } from "../data/data";
+import { Availablecategories, Categories } from "../data/data";
 import CloseDiagonale from "./close";
 import TextField from "@mui/material/TextField";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-import MenuItem from "@mui/material/MenuItem";
 import InputLabel from "@mui/material/InputLabel";
 import { Plans } from "../data/data";
 export const edit = () => {
   return (
-    //     <!--
-    // category: Design
-    // tags: [pencil, change, update]
-    // version: "1.0"
-    // unicode: "ea98"
-    // -->
     <svg
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
@@ -37,13 +28,18 @@ export const edit = () => {
     </svg>
   );
 };
-function CustimizedSelect({ optien }) {
+function CustimizedSelect({ value, option, role }) {
+  const [current, setCurrent] = useState(value);
   return (
     <Autocomplete
-      disablePortal
-      options={top100Films}
-      sx={{ width: 300 }}
-      renderInput={(params) => <TextField {...params} label="Movie" />}
+      value={current}
+      id="controllable-states-demo"
+      onChange={(event, newValue) => {
+        setCurrent(newValue);
+      }}
+      options={option}
+      sx={{ width: "100%" }}
+      renderInput={(params) => <TextField {...params} label={role} />}
     />
   );
 }
@@ -54,7 +50,6 @@ export default function EditBudgetElement({
   setOpen,
   actualElement,
 }) {
-  const [category, setCategory] = useState(actualElement?.item);
   return (
     <Dialog open={open}>
       <DialogTitle>
@@ -65,15 +60,17 @@ export default function EditBudgetElement({
       </DialogTitle>
       <DialogContent
         sx={{
-          width: "800px",
+          width: "560px",
           overflowX: "hidden",
           height: "500px",
         }}
       >
-        <div>
-          <select className="py-2  w-[50%] md:w-[70%]">
-            <option>{actualElement?.item}</option>
-          </select>
+        <div className="mt-5">
+          <CustimizedSelect
+            value={actualElement?.item}
+            option={Availablecategories}
+            role={"Budget Category"}
+          />
         </div>
       </DialogContent>
     </Dialog>
