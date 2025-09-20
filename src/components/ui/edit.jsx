@@ -70,7 +70,19 @@ export default function EditBudgetElement({
   actualElement,
 }) {
   return (
-    <Dialog open={open}>
+    <Dialog
+      open={open}
+      slotProps={{
+        paper: {
+          sx: {
+            border: "2px solid white", // custom border
+            borderRadius: "10px", // rounded corners
+            width: { xs: "90%", sm: "500px", lg: "560px" }, // responsive width
+            maxWidth: "none", // allow custom width
+          },
+        },
+      }}
+    >
       <DialogTitle>
         <div className="flex justify-between items-center">
           <div className="flex flex-col ">
@@ -82,9 +94,9 @@ export default function EditBudgetElement({
       </DialogTitle>
       <DialogContent
         sx={{
-          width: "560px",
-          overflowX: "hidden",
-          height: "380px",
+          width: "100%",
+          overflowY: "auto",
+          height: "100%",
         }}
       >
         <div className="mt-5 flex flex-col  gap-5">

@@ -203,6 +203,7 @@ export default function Budget() {
   const [open, setOpen] = useState(false);
   const [Current, setCurrent] = useState();
   const [config, setConfig] = useState({ action: "", description: "" });
+  // asyn fun to retrive data from back
   return (
     <>
       <BudgetOverView Budgets={Categories} />
