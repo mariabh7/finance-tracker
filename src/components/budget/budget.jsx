@@ -128,7 +128,15 @@ function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
     </li>
   );
 }
-function BudgetCategories({ setopen, setCurrent, config }) {
+function BudgetCategories({ setopen, setCurrent, setconfig }) {
+  const handleAdding = () => {
+    setCurrent({});
+    setopen(true);
+    setconfig({
+      action: "add budget ",
+      description: "set a spending linit for a category",
+    });
+  };
   return (
     <main className="OuterStyle flex flex-col justify-start gap-6 md:gap-10">
       <div className="flex justify-between items-center ">
@@ -139,7 +147,10 @@ function BudgetCategories({ setopen, setCurrent, config }) {
           </p>
         </div>
         <div>
-          <button className="border-2 flex justify-start gap-1 px-3 py-2 border-black bg-black rounded-lg text-white capitalize">
+          <button
+            onClick={handleAdding}
+            className="border-2 flex justify-start gap-1 px-3 py-2 border-black bg-black rounded-lg text-white capitalize"
+          >
             {plus()} add budget
           </button>
         </div>
@@ -152,7 +163,7 @@ function BudgetCategories({ setopen, setCurrent, config }) {
               Sitem={Category}
               setOpen={setopen}
               setCurrent={setCurrent}
-              setDiagonaleConfig={config}
+              setDiagonaleConfig={setconfig}
             />
           ))}
         </ul>
@@ -170,7 +181,7 @@ export default function Budget() {
       <BudgetCategories
         setopen={setOpen}
         setCurrent={setCurrent}
-        config={setConfig}
+        setconfig={setConfig}
       />
       <EditBudgetElement
         action={config.action}
