@@ -9,7 +9,7 @@ export const Categories = [
   {
     item: "transportation",
     itemId: "2",
-    period: "monthly",
+    period: "weekly",
     paid: 100,
     total: 300,
   },

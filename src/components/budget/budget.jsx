@@ -76,10 +76,13 @@ function BudgetOverView({ Budgets = [] }) {
     </header>
   );
 }
-function SingleItem({ Sitem, setOpen, setCurrent }) {
+function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
   function handlChange(Current) {
-    console.log(Current);
     setCurrent(Current);
+    setDiagonaleConfig({
+      action: "update budget",
+      description: "update your budget limit ",
+    });
     setOpen(true);
   }
   const Percentage =
@@ -125,7 +128,7 @@ function SingleItem({ Sitem, setOpen, setCurrent }) {
     </li>
   );
 }
-function BudgetCategories({ setopen, setCurrent }) {
+function BudgetCategories({ setopen, setCurrent, config }) {
   return (
     <main className="OuterStyle flex flex-col justify-start gap-6 md:gap-10">
       <div className="flex justify-between items-center ">
@@ -149,6 +152,7 @@ function BudgetCategories({ setopen, setCurrent }) {
               Sitem={Category}
               setOpen={setopen}
               setCurrent={setCurrent}
+              setDiagonaleConfig={config}
             />
           ))}
         </ul>
@@ -159,13 +163,18 @@ function BudgetCategories({ setopen, setCurrent }) {
 export default function Budget() {
   const [open, setOpen] = useState(false);
   const [Current, setCurrent] = useState();
+  const [config, setConfig] = useState({ action: "", description: "" });
   return (
     <>
       <BudgetOverView Budgets={Categories} />
-      <BudgetCategories setopen={setOpen} setCurrent={setCurrent} />
+      <BudgetCategories
+        setopen={setOpen}
+        setCurrent={setCurrent}
+        config={setConfig}
+      />
       <EditBudgetElement
-        action={"edit budget"}
-        description={"update your budget limit"}
+        action={config.action}
+        description={config.description}
         open={open}
         setOpen={setOpen}
         actualElement={Current}

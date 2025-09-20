@@ -43,6 +43,25 @@ function CustimizedSelect({ value, option, role }) {
     />
   );
 }
+function NumberInput({ title, value }) {
+  const [Budget, setBudget] = useState(value);
+  return (
+    <TextField
+      label={title}
+      value={Budget}
+      onChange={(e) => setBudget(e.target.value)}
+      type="number"
+      InputLabelProps={{
+        shrink: true, // keeps label visible when empty
+      }}
+      inputProps={{
+        min: 0,
+        max: 10000000, // optional constraints
+        step: 0.1,
+      }}
+    />
+  );
+}
 export default function EditBudgetElement({
   action,
   description,
@@ -54,7 +73,10 @@ export default function EditBudgetElement({
     <Dialog open={open}>
       <DialogTitle>
         <div className="flex justify-between items-center">
-          <h1 className="capitalize font-Ubuntu">{action}</h1>
+          <div className="flex flex-col ">
+            <h1 className="capitalize font-Ubuntu">{action}</h1>
+            <p className="text-[13px] text-gray-500">{description}</p>
+          </div>
           <CloseDiagonale setopen={setOpen} />
         </div>
       </DialogTitle>
@@ -62,15 +84,32 @@ export default function EditBudgetElement({
         sx={{
           width: "560px",
           overflowX: "hidden",
-          height: "500px",
+          height: "380px",
         }}
       >
-        <div className="mt-5">
+        <div className="mt-5 flex flex-col  gap-5">
           <CustimizedSelect
-            value={actualElement?.item}
+            value={actualElement?.item || ""}
             option={Availablecategories}
             role={"Budget Category"}
           />
+          <NumberInput
+            title={"Budget Limit"}
+            value={actualElement?.total || 0}
+          />
+          <CustimizedSelect
+            value={actualElement?.period || ""}
+            option={Plans}
+            role={"Period"}
+          />
+          <button
+            onClick={() => {
+              setOpen(false);
+            }}
+            className="bg-black cursor-pointer p-2 capitalize rounded-lg w-full text-white text-center"
+          >
+            {action}
+          </button>
         </div>
       </DialogContent>
     </Dialog>
