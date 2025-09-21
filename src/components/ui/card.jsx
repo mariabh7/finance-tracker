@@ -8,18 +8,18 @@ function Card({ title, number, description }) {
     <div className="flex OuterStyle flex-col justify-between gap-5">
       <div className="flex justify-between items-center">
         <h3 className="text-lg capitalize text-black ">{title}</h3>
-        {title === "total income"
+        {title.includes("income")
           ? trendingUp()
-          : title === "total expense"
+          : title.includes("expense")
           ? trendingDown()
           : null}
       </div>
       <div>
         <h4
           className={`text-2xl mb-2 font-medium ${
-            title === "total income"
+            title.includes("income")
               ? "text-green-600"
-              : title === "total expense"
+              : title.includes("expense")
               ? "text-red-600"
               : "text-black"
           }`}
