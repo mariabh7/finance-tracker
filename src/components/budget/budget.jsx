@@ -6,23 +6,7 @@ import EditBudgetElement, { edit } from "../ui/edit";
 import { trash } from "../ui/remove";
 import { Categories } from "../data/data";
 import { useState } from "react";
-function ProgressBar({ progress = 81 }) {
-  return (
-    <LinearProgress
-      variant="determinate"
-      value={progress}
-      sx={{
-        height: 10,
-        borderRadius: 5,
-        mt: 1,
-        backgroundColor: "#f0f0f0",
-        "& .MuiLinearProgress-bar": {
-          backgroundColor: "#000000",
-        },
-      }}
-    />
-  );
-}
+import ProgressBar from "../ui/Progress";
 function BudgetOverView({ Budgets = [] }) {
   const TotalBudget = Budgets?.map((item) => item.total)?.reduce(
     (sum, next) => sum + next
@@ -185,7 +169,7 @@ function BudgetCategories({ budgets, setopen, setCurrent, setconfig }) {
       </div>
       <section>
         <ul className="flex flex-col  gap-6">
-          {budgets?.map((Category) => (
+          {Categories?.map((Category) => (
             <SingleItem
               key={Category.itemId}
               Sitem={Category}
