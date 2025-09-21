@@ -9,7 +9,7 @@ export default function App() {
   const Comps = { DashBoard, Transactions, Budget, Analytics };
   const ActiveComponent = Comps[active];
   return (
-    <div className="flex flex-col lg:flex-row gap-5">
+    <div className=" relative h-full flex flex-col lg:flex-row gap-5">
       <Navigation active={active} setActive={setActive} />
       <div
         data-slot={`${ActiveComponent.name}`}

@@ -19,7 +19,7 @@ export function GenUL({ active, setActive }) {
     setActive(itemId);
   }
   return (
-    <div className="flex flex-col justify-between h-screen gap-10 ">
+    <div className="flex flex-col justify-between h-full gap-10 ">
       <ul className="flex flex-col justify-normal gap-5">
         {NavItems.map((item) => (
           <li
