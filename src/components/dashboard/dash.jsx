@@ -3,7 +3,64 @@ import Card from "../ui/card";
 import { Categories } from "../data/data";
 import { getTotal } from "../data/data";
 import ProgressBar from "../ui/Progress";
-
+import { PieChart } from "@mui/x-charts/PieChart";
+import { BarChart } from "@mui/x-charts";
+function HeadingContent({ title, description }) {
+  return (
+    <div className="flex flex-col gap-1 w-[100%] ">
+      <h1 className="capitalize text-lg font-medium">{title}</h1>
+      <p className="TextP first-letter:uppercase">{description}</p>
+    </div>
+  );
+}
+function BasicChart() {
+  return (
+    <div className="OuterStyle flex flex-col gap-5">
+      <HeadingContent
+        title={"icome vs expenses"}
+        description={"monthly comparison over the last 6 months"}
+      />
+      <BarChart
+        xAxis={[{ data: ["january", "february", "march"] }]}
+        series={[{ data: [400, 600, 5000] }, { data: [900, 4000, 30] }]}
+        height={300}
+      />
+    </div>
+  );
+}
+export function BasicPie() {
+  return (
+    <div className="OuterStyle flex flex-col gap-5">
+      <HeadingContent
+        title={"Expense categories"}
+        description={"current month breakdown"}
+      />
+      <PieChart
+        hideLegend={true}
+        series={[
+          {
+            data: Categories.map((item) => ({
+              id: item.itemId,
+              value: item.paid,
+              label: item.item,
+            })),
+          },
+        ]}
+        animation={{ duration: 800 }}
+        width={200}
+        height={200}
+      />
+    </div>
+  );
+}
+function VisualReview() {
+  return (
+    <section className="grid  gap-5 grid-cols-1 md:grid-cols-2">
+      <BasicChart />
+      <BasicPie />
+    </section>
+  );
+}
 function ItemToSHow({ CurrentItem }) {
   const Percentage =
     CurrentItem?.paid > CurrentItem?.total
@@ -13,10 +70,10 @@ function ItemToSHow({ CurrentItem }) {
     <li className="w-full ">
       <div className="flex justify-between items-center">
         <div className="flex justify-between gap-0 w-[100%] ">
-          <h1 className="capitalize text-base md:text-lg font-medium">
+          <h1 className="capitalize text-base  font-medium">
             {CurrentItem.item}
           </h1>
-          <p className="capitalize text-gray-400 text-[14px] md:text-base ">
+          <p className="capitalize text-gray-400 text-[13px] md:text-base ">
             ${CurrentItem.paid} / ${CurrentItem.total}
           </p>
         </div>
@@ -32,7 +89,7 @@ function ItemToSHow({ CurrentItem }) {
 }
 function BudgetView() {
   return (
-    <div className="OuterStyle">
+    <section className="OuterStyle">
       <div className="flex flex-col gap-1 w-[50%] ">
         <h1 className="capitalize text-lg font-medium">budget progress </h1>
         <p className="TextP first-letter:uppercase">
@@ -44,7 +101,7 @@ function BudgetView() {
           <ItemToSHow key={Category.itemId} CurrentItem={Category} />
         ))}
       </ul>
-    </div>
+    </section>
   );
 }
 function DashBoard() {
@@ -77,7 +134,8 @@ function DashBoard() {
           description={"of monthly budget used"}
         />
       </header>
-      <main>
+      <main className="flex flex-col gap-10 ">
+        <VisualReview />
         <BudgetView />
       </main>
     </>
