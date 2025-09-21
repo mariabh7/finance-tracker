@@ -84,7 +84,7 @@ function DeleteButton({ openSnack, setOpensnack, item }) {
     Categories.splice(Categories?.indexOf(item), 1);
     setTimeout(() => {
       setOpensnack(false);
-    }, 1000);
+    }, 2000);
   };
   return (
     <>
