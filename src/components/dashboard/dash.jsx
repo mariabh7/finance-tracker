@@ -21,8 +21,11 @@ function BasicChart() {
         description={"monthly comparison over the last 6 months"}
       />
       <BarChart
-        xAxis={[{ data: ["january", "february", "march"] }]}
-        series={[{ data: [400, 600, 5000] }, { data: [900, 4000, 30] }]}
+        xAxis={[{ data: ["january", "february", "march", "april", "may"] }]}
+        series={[
+          { data: [400, 600, 4500, 3000, 300] },
+          { data: [900, 4000, 30, 3999, 2000] },
+        ]}
         height={300}
       />
     </div>
@@ -90,12 +93,10 @@ function ItemToSHow({ CurrentItem }) {
 function BudgetView() {
   return (
     <section className="OuterStyle">
-      <div className="flex flex-col gap-1 w-[50%] ">
-        <h1 className="capitalize text-lg font-medium">budget progress </h1>
-        <p className="TextP first-letter:uppercase">
-          track your spending against your budget{" "}
-        </p>
-      </div>
+      <HeadingContent
+        title={"budget progress"}
+        description={" track your spending against your budget"}
+      />
       <ul className="flex flex-col mt-10 gap-6">
         {Categories?.map((Category) => (
           <ItemToSHow key={Category.itemId} CurrentItem={Category} />
@@ -111,7 +112,7 @@ function DashBoard() {
     <>
       <header
         data-slot="dashboard-header"
-        className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        className="grid gap-3 md:gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
       >
         <Card
           title={"total income"}
@@ -134,7 +135,7 @@ function DashBoard() {
           description={"of monthly budget used"}
         />
       </header>
-      <main className="flex flex-col gap-10 ">
+      <main className="flex flex-col gap-10 mb-4 lg:mb-0 ">
         <VisualReview />
         <BudgetView />
       </main>
