@@ -5,14 +5,7 @@ import { getTotal } from "../data/data";
 import ProgressBar from "../ui/Progress";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { BarChart } from "@mui/x-charts";
-function HeadingContent({ title, description }) {
-  return (
-    <div className="flex flex-col gap-1 w-[100%] ">
-      <h1 className="capitalize text-lg font-medium">{title}</h1>
-      <p className="TextP first-letter:uppercase">{description}</p>
-    </div>
-  );
-}
+import HeadingContent from "../ui/CardHeader";
 function BasicChart() {
   return (
     <div className="OuterStyle flex flex-col gap-5">
@@ -50,8 +43,8 @@ export function BasicPie() {
           },
         ]}
         animation={{ duration: 800 }}
-        width={200}
-        height={200}
+        width={250}
+        height={300}
       />
     </div>
   );
