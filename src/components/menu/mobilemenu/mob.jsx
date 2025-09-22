@@ -39,10 +39,10 @@ function MobMenu({ active, setActive }) {
       <div
         className={`mobile h-fit absolute ${
           isOpen ? "block" : "hidden"
-        } top-0  right-0 py-6 px-3 border-l-[1px]  border-l-gray-300 bg-white w-[100%] md:w-[50%]`}
+        } top-0  right-0 py-6 px-3 border-l-[1px]  border-l-gray-300 bg-white w-[100%] lg:w-[50%]`}
       >
-        <h1 className="capitalize flex gap-2 font-medium text-2xl mb-7">
-          {currencyDollar()}menu items{" "}
+        <h1 className="capitalize flex gap-2 items-center font-medium text-2xl mb-7">
+          {currencyDollar()}browse pages{" "}
         </h1>
         <GenUL active={active} setActive={setActive} />
       </div>

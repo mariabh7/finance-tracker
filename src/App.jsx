@@ -4,9 +4,10 @@ import DashBoard from "./components/dashboard/dash.jsx";
 import Transactions from "./components/transactions/trans.jsx";
 import Budget from "./components/budget/budget.jsx";
 import Analytics from "./components/analytics/index.jsx";
+import settings from "./components/settings/settings.jsx";
 export default function App() {
   const [active, setActive] = useState("DashBoard");
-  const Comps = { DashBoard, Transactions, Budget, Analytics };
+  const Comps = { DashBoard, Transactions, Budget, Analytics, settings };
   const ActiveComponent = Comps[active];
   return (
     <div className=" relative h-full flex flex-col lg:flex-row gap-5">
