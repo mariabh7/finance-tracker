@@ -1,6 +1,7 @@
 import Card from "../ui/card";
 function Analytics() {
   return (
+    // provide analytics monthly in backend
     <>
       <header
         data-slot="dashboard-header"
@@ -12,7 +13,7 @@ function Analytics() {
           description={"+12% from last month"}
         />
         <Card
-          title={"total expense"}
+          title={"avg monthly expense"}
           number={4000}
           description={"-8% from last month"}
         />

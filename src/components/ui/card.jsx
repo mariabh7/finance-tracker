@@ -24,7 +24,13 @@ function Card({ title, number, description }) {
               : "text-black"
           }`}
         >
-          ${number}
+          {!title.includes("rate") &&
+          !title.includes("days") &&
+          !title.includes("status")
+            ? "$" + number
+            : title.includes("days")
+            ? number
+            : "%" + number}
         </h4>
         {description ? (
           <p className="text-gray-400 text-sm">{description}</p>
