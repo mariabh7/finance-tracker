@@ -1,6 +1,41 @@
 import { LineChart } from "@mui/x-charts";
 import Card from "../ui/card";
+import ProgressBar from "../ui/Progress";
+import { useState } from "react";
 import HeadingContent from "../ui/CardHeader";
+function SavingsOverview() {
+  const monthlysaving = [
+    { month: "Jan", savings: 4000 },
+    { month: "Feb", savings: 3000 },
+    { month: "Mar", savings: 5000 },
+    { month: "Apr", savings: 4500 },
+    { month: "May", savings: 3800 },
+    { month: "Jun", savings: 4200 },
+  ];
+  return (
+    <div>
+      <div className="OuterStyle">
+        <HeadingContent
+          title={"savings goals progress"}
+          description={"track your progress towards your savings target"}
+        />
+        <div>
+          <div className="flex gap-2 flex-col ">
+            <h2 className="text-4xl text-blue-500 font-medium">$3500</h2>
+            <span className="text-gray-500">of $5000</span>
+          </div>
+          <div>
+            <div>
+              <label>progress</label>
+              <span>50%</span>
+            </div>
+            <ProgressBar progress={50} />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 function FinancialMonthsOverview() {
   const monthlyData = [
     { month: "Jan", income: 4000, expenses: 2400 },
@@ -40,6 +75,8 @@ function FinancialMonthsOverview() {
   );
 }
 function Analytics() {
+  const Gen = ["trends", "goals"];
+  const [see, setSee] = useState("trends");
   return (
     // provide analytics monthly in backend
     <>
@@ -68,8 +105,26 @@ function Analytics() {
           description={"of monthly budget used"}
         />
       </header>
-      <main className="grid grid-cols-1 md:grid-cols-2">
-        <FinancialMonthsOverview />
+      <main className="flex flex-col gap-5">
+        <div className="flex w-fit  capitalize justify-start gap-5 bg-gray-200  px-3 rounded-4xl">
+          {Gen.map((cat) => {
+            return (
+              <button
+                onClick={() => {
+                  setSee(cat);
+                }}
+                className={`capitalize my-2 py-1 px-5 rounded-full cursor-pointer text-base ${
+                  see === cat ? "bg-white" : "bg-transparent"
+                }`}
+              >
+                {cat}
+              </button>
+            );
+          })}
+        </div>
+        <section className="grid grid-cols-1 md:grid-cols-2">
+          {see === "trends" ? <FinancialMonthsOverview /> : <SavingsOverview />}
+        </section>
       </main>
     </>
   );
