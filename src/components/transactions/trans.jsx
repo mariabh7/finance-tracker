@@ -13,6 +13,8 @@ import { circleArrowUp } from "../ui/arrowup";
 import { circleArrowDown } from "../ui/arrowdown";
 import { getTotal } from "../data/data";
 import { updateBudget } from "../data/data";
+import { useState } from "react";
+import { EditTransactions } from "../ui/edit";
 function TransactionsTable() {
   return (
     <>
@@ -72,6 +74,18 @@ function TransactionsTable() {
   );
 }
 function MainContainer() {
+  const [open, setOpens] = useState(false);
+  const [TransConfig, setTransConfig] = useState({
+    action: "",
+    description: "",
+  });
+  const handleAddingTransaction = () => {
+    setTransConfig({
+      action: "add transaction ",
+      description: "add a new income or expense transaction",
+    });
+    setOpens(true);
+  };
   return (
     <main className="OuterStyle flex flex-col justify-start gap-6 md:gap-10">
       <div className="flex justify-between items-center align-baseline ">
@@ -83,9 +97,7 @@ function MainContainer() {
         </div>
         <div>
           <button
-            onClick={() => {
-              updateBudget();
-            }}
+            onClick={handleAddingTransaction}
             className="border-2  h-fit flex items-center justify-start gap-1 px-3 py-2 border-black bg-black rounded-lg text-white capitalize"
           >
             {plus()} add transaction
@@ -94,6 +106,13 @@ function MainContainer() {
       </div>
       <section>
         <TransactionsTable />
+        <EditTransactions
+          action={TransConfig.action}
+          description={TransConfig.description}
+          open={open}
+          setModalOpen={setOpens}
+          actualElement={{}}
+        />
       </section>
     </main>
   );

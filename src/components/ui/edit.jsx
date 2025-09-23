@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
@@ -117,6 +117,75 @@ export default function EditBudgetElement({
           <button
             onClick={() => {
               setOpen(false);
+            }}
+            className="bg-black cursor-pointer p-2 capitalize rounded-lg w-full text-white text-center"
+          >
+            {action}
+          </button>
+        </div>
+      </DialogContent>
+    </Dialog>
+  );
+}
+export function EditTransactions({
+  action,
+  description,
+  open = false,
+  setModalOpen,
+  actualElement,
+}) {
+  return (
+    <Dialog
+      open={open}
+      slotProps={{
+        paper: {
+          sx: {
+            border: "2px solid white", // custom border
+            borderRadius: "10px", // rounded corners
+            width: { xs: "90%", sm: "500px", lg: "560px" }, // responsive width
+            maxWidth: "none", // allow custom width
+          },
+        },
+      }}
+    >
+      <DialogTitle>
+        <div className="flex justify-between items-center">
+          <div className="flex flex-col ">
+            <h1 className="capitalize font-Ubuntu">{action}</h1>
+            <p className="text-[13px] text-gray-500">{description}</p>
+          </div>
+          <CloseDiagonale setopen={setModalOpen} />
+        </div>
+      </DialogTitle>
+      <DialogContent
+        sx={{
+          width: "100%",
+          overflowY: "auto",
+          height: "100%",
+        }}
+      >
+        <div className="mt-5 flex flex-col  gap-5">
+          <div className="grid grid-cols-2 gap-5">
+            <CustimizedSelect
+              value={actualElement?.type || "income"}
+              option={["income", "expense"]}
+              role={"type"}
+            />
+            <NumberInput title={"amount"} value={actualElement?.amount || 0} />
+          </div>
+          <CustimizedSelect
+            value={actualElement?.category || ""}
+            option={Availablecategories}
+            role={"category"}
+          />
+          <TextField
+            id="outlined-basic"
+            label="description"
+            variant="outlined"
+          />
+          <button
+            onClick={() => {
+              setModalOpen(false);
             }}
             className="bg-black cursor-pointer p-2 capitalize rounded-lg w-full text-white text-center"
           >
