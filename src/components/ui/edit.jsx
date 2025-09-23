@@ -181,6 +181,7 @@ export function EditTransactions({
           <TextField
             id="outlined-basic"
             label="description"
+            value={actualElement?.description || ""}
             variant="outlined"
           />
           <button

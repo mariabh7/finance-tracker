@@ -15,7 +15,15 @@ import { getTotal } from "../data/data";
 import { updateBudget } from "../data/data";
 import { useState } from "react";
 import { EditTransactions } from "../ui/edit";
-function TransactionsTable() {
+function TransactionsTable({ setopen, setTransConfig }) {
+  const handleEditting = (item) => {
+    setTransConfig({
+      action: "edit transaction ",
+      description: "update your transactions details ",
+      item: item,
+    });
+    setopen(true);
+  };
   return (
     <>
       <TableContainer sx={{ width: "100%" }}>
@@ -60,7 +68,14 @@ function TransactionsTable() {
                   <TableCell>
                     {" "}
                     <div className="flex gap-2 justify-start">
-                      <button className="Buttons">{edit()}</button>
+                      <button
+                        onClick={() => {
+                          handleEditting(trans);
+                        }}
+                        className="Buttons"
+                      >
+                        {edit()}
+                      </button>
                       <button className="Buttons">{trash()}</button>
                     </div>
                   </TableCell>
@@ -78,6 +93,7 @@ function MainContainer() {
   const [TransConfig, setTransConfig] = useState({
     action: "",
     description: "",
+    item: {},
   });
   const handleAddingTransaction = () => {
     setTransConfig({
@@ -105,13 +121,13 @@ function MainContainer() {
         </div>
       </div>
       <section>
-        <TransactionsTable />
+        <TransactionsTable setopen={setOpens} setTransConfig={setTransConfig} />
         <EditTransactions
           action={TransConfig.action}
           description={TransConfig.description}
           open={open}
           setModalOpen={setOpens}
-          actualElement={{}}
+          actualElement={TransConfig.item}
         />
       </section>
     </main>
