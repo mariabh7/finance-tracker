@@ -1,13 +1,13 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import Dialog from "@mui/material/Dialog";
 import DialogTitle from "@mui/material/DialogTitle";
 import DialogContent from "@mui/material/DialogContent";
 import Autocomplete from "@mui/material/Autocomplete";
-import { Availablecategories, Categories } from "../data/data";
+import { Availablecategories, Categories, Plans } from "../data/data";
 import CloseDiagonale from "./close";
 import TextField from "@mui/material/TextField";
-import InputLabel from "@mui/material/InputLabel";
-import { Plans } from "../data/data";
+
 export const edit = () => {
   return (
     <svg
@@ -28,40 +28,39 @@ export const edit = () => {
     </svg>
   );
 };
-function CustimizedSelect({ value, option, role }) {
-  const [current, setCurrent] = useState(value);
+
+function CustimizedSelect({ value, option, role, onChange }) {
   return (
     <Autocomplete
-      value={current}
+      value={value}
       id="controllable-states-demo"
-      onChange={(event, newValue) => {
-        setCurrent(newValue);
-      }}
+      onChange={(event, newValue) => onChange(newValue)}
       options={option}
       sx={{ width: "100%" }}
       renderInput={(params) => <TextField {...params} label={role} />}
     />
   );
 }
-function NumberInput({ title, value }) {
-  const [Budget, setBudget] = useState(value);
+
+function NumberInput({ title, value, onChange }) {
   return (
     <TextField
       label={title}
-      value={Budget}
-      onChange={(e) => setBudget(e.target.value)}
+      value={value}
+      onChange={(e) => onChange(e.target.value)}
       type="number"
-      InputLabelProps={{
-        shrink: true, // keeps label visible when empty
-      }}
-      inputProps={{
-        min: 0,
-        max: 10000000, // optional constraints
-        step: 0.1,
+      slotProps={{
+        inputLabel: true,
+        htmlInput: {
+          min: 0,
+          max: 10000000,
+          step: 0.1,
+        },
       }}
     />
   );
 }
+
 export default function EditBudgetElement({
   action,
   description,
@@ -69,16 +68,35 @@ export default function EditBudgetElement({
   setOpen,
   actualElement,
 }) {
+  const [category, setCategory] = useState(actualElement?.item || "");
+  const [limit, setLimit] = useState(actualElement?.total || 0);
+  const [period, setPeriod] = useState(actualElement?.period || "");
+  useEffect(() => {
+    setCategory(actualElement?.item || "");
+    setLimit(actualElement?.total || 0);
+    setPeriod(actualElement?.period || "");
+  }, [actualElement]);
+  const handleSubmit = () => {
+    const updated = {
+      ...actualElement,
+      item: category,
+      total: limit,
+      period,
+    };
+    console.log("Budget updated:", updated);
+    setOpen(false);
+  };
+
   return (
     <Dialog
       open={open}
       slotProps={{
         paper: {
           sx: {
-            border: "2px solid white", // custom border
-            borderRadius: "10px", // rounded corners
-            width: { xs: "90%", sm: "500px", lg: "560px" }, // responsive width
-            maxWidth: "none", // allow custom width
+            border: "2px solid white",
+            borderRadius: "10px",
+            width: { xs: "90%", sm: "500px", lg: "560px" },
+            maxWidth: "none",
           },
         },
       }}
@@ -99,25 +117,26 @@ export default function EditBudgetElement({
           height: "100%",
         }}
       >
-        <div className="mt-5 flex flex-col  gap-5">
+        <div className="mt-5 flex flex-col gap-5">
           <CustimizedSelect
-            value={actualElement?.item || ""}
+            value={category}
             option={Availablecategories}
             role={"Budget Category"}
+            onChange={setCategory}
           />
           <NumberInput
             title={"Budget Limit"}
-            value={actualElement?.total || 0}
+            value={limit}
+            onChange={setLimit}
           />
           <CustimizedSelect
-            value={actualElement?.period || ""}
+            value={period}
             option={Plans}
             role={"Period"}
+            onChange={setPeriod}
           />
           <button
-            onClick={() => {
-              setOpen(false);
-            }}
+            onClick={handleSubmit}
             className="bg-black cursor-pointer p-2 capitalize rounded-lg w-full text-white text-center"
           >
             {action}
@@ -127,6 +146,7 @@ export default function EditBudgetElement({
     </Dialog>
   );
 }
+
 export function EditTransactions({
   action,
   description,
@@ -134,16 +154,39 @@ export function EditTransactions({
   setModalOpen,
   actualElement,
 }) {
+  const [type, setType] = useState(actualElement?.type || "income");
+  const [amount, setAmount] = useState(actualElement?.amount || 0);
+  const [category, setCategory] = useState(actualElement?.category || "");
+  const [desc, setDesc] = useState(actualElement?.description || "");
+  useEffect(() => {
+    setType(actualElement?.type || "income");
+    setAmount(actualElement?.amount || 0);
+    setCategory(actualElement?.category || "");
+    setDesc(actualElement?.description || "");
+  }, [actualElement]);
+
+  const handleSubmit = () => {
+    const updated = {
+      ...actualElement,
+      type,
+      amount,
+      category,
+      description: desc,
+    };
+    console.log("Transaction updated:", updated);
+    setModalOpen(false);
+  };
+
   return (
     <Dialog
       open={open}
       slotProps={{
         paper: {
           sx: {
-            border: "2px solid white", // custom border
-            borderRadius: "10px", // rounded corners
-            width: { xs: "90%", sm: "500px", lg: "560px" }, // responsive width
-            maxWidth: "none", // allow custom width
+            border: "2px solid white",
+            borderRadius: "10px",
+            width: { xs: "90%", sm: "500px", lg: "560px" },
+            maxWidth: "none",
           },
         },
       }}
@@ -164,30 +207,31 @@ export function EditTransactions({
           height: "100%",
         }}
       >
-        <div className="mt-5 flex flex-col  gap-5">
+        <div className="mt-5 flex flex-col gap-5">
           <div className="grid grid-cols-2 gap-5">
             <CustimizedSelect
-              value={actualElement?.type || "income"}
+              value={type}
               option={["income", "expense"]}
               role={"type"}
+              onChange={setType}
             />
-            <NumberInput title={"amount"} value={actualElement?.amount || 0} />
+            <NumberInput title={"amount"} value={amount} onChange={setAmount} />
           </div>
           <CustimizedSelect
-            value={actualElement?.category || ""}
+            value={category}
             option={Availablecategories}
             role={"category"}
+            onChange={setCategory}
           />
           <TextField
             id="outlined-basic"
             label="description"
-            value={actualElement?.description || ""}
+            value={desc}
+            onChange={(e) => setDesc(e.target.value)}
             variant="outlined"
           />
           <button
-            onClick={() => {
-              setModalOpen(false);
-            }}
+            onClick={handleSubmit}
             className="bg-black cursor-pointer p-2 capitalize rounded-lg w-full text-white text-center"
           >
             {action}
