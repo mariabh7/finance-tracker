@@ -1,9 +1,12 @@
 import { LineChart } from "@mui/x-charts";
+import { SparkLineChart } from "@mui/x-charts";
+import Stack from "@mui/material/Stack";
 import Card from "../ui/card";
 import ProgressBar from "../ui/Progress";
 import { useState } from "react";
 import HeadingContent from "../ui/CardHeader";
-function SavingsOverview() {
+// savings rate trend component
+function SpendingsOverview() {
   const monthlysaving = [
     { month: "Jan", savings: 4000 },
     { month: "Feb", savings: 3000 },
@@ -12,6 +15,39 @@ function SavingsOverview() {
     { month: "May", savings: 3800 },
     { month: "Jun", savings: 4200 },
   ];
+
+  return (
+    <div className="OuterStyle">
+      <HeadingContent
+        title={"savings trend"}
+        description={"monthly saving accumulation"}
+      />
+      <LineChart
+        xAxis={[
+          {
+            scaleType: "band",
+            data: monthlysaving.map((datas) => datas.month),
+          },
+        ]}
+        series={[
+          {
+            data: monthlysaving.map((datas) => datas.savings),
+            color: "#2563EB",
+          },
+        ]}
+        yAxis={[{ min: 0, max: 5100 }]}
+        height={300}
+        sx={{
+          "& .MuiChartsPlotArea-root": {
+            fill: "#2563EB",
+          },
+        }}
+      />
+    </div>
+  );
+}
+// set saving goal component
+function SetGoal() {
   return (
     <div>
       <div className="OuterStyle flex flex-col gap-5">
@@ -34,11 +70,11 @@ function SavingsOverview() {
         </div>
         <div className=" my-10 flex justify-around">
           <div className="flex  flex-col items-center ">
-            <h2 className="text-lg text-black font-medium">$800</h2>
+            <h2 className="text-xl text-black font-medium">$800</h2>
             <span className="text-gray-400">monthly target</span>
           </div>
           <div className="flex  flex-col items-center ">
-            <h2 className="text-lg text-black font-medium">3</h2>
+            <h2 className="text-xl text-black font-medium">3</h2>
             <span className="text-gray-400">months to go</span>
           </div>
         </div>
@@ -46,6 +82,7 @@ function SavingsOverview() {
     </div>
   );
 }
+// financial monthly review
 function FinancialMonthsOverview() {
   const monthlyData = [
     { month: "Jan", income: 4000, expenses: 2400 },
@@ -84,6 +121,16 @@ function FinancialMonthsOverview() {
     </div>
   );
 }
+// trends section
+function TrendsData() {
+  return (
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <FinancialMonthsOverview />
+      <SpendingsOverview />
+    </div>
+  );
+}
+// whole analytics components that consist of prev comps
 function Analytics() {
   const Gen = ["trends", "goals"];
   const [see, setSee] = useState("trends");
@@ -115,7 +162,7 @@ function Analytics() {
           description={"of monthly budget used"}
         />
       </header>
-      <main className="flex flex-col gap-5">
+      <main className="flex flex-col gap-5 mb-5 md:mb-0">
         <div className="flex w-fit  capitalize justify-start gap-5 bg-gray-200  px-3 rounded-4xl">
           {Gen.map((cat, i) => {
             return (
@@ -133,9 +180,7 @@ function Analytics() {
             );
           })}
         </div>
-        <section className="grid grid-cols-1 md:grid-cols-2">
-          {see === "trends" ? <FinancialMonthsOverview /> : <SavingsOverview />}
-        </section>
+        <section>{see === "trends" ? <TrendsData /> : <SetGoal />}</section>
       </main>
     </>
   );
