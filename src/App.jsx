@@ -14,7 +14,7 @@ export default function App() {
       <Navigation active={active} setActive={setActive} />
       <div
         data-slot={`${ActiveComponent.name}`}
-        className="py-5 lg:py-10 w-full px-5 h-screen lg:overflow-y-scroll flex flex-col justify-start gap-10"
+        className="py-5 mb-5 lg:mb-0 lg:py-10 w-full px-5 h-screen lg:overflow-y-scroll flex flex-col justify-start gap-10"
       >
         {ActiveComponent ? <ActiveComponent /> : <p>not found</p>}
       </div>

@@ -8,11 +8,11 @@ import HeadingContent from "../ui/CardHeader";
 // savings rate trend component
 function SpendingsOverview() {
   const monthlysaving = [
-    { month: "Jan", savings: 4000 },
-    { month: "Feb", savings: 3000 },
-    { month: "Mar", savings: 5000 },
-    { month: "Apr", savings: 4500 },
-    { month: "May", savings: 3800 },
+    { month: "Jan", savings: 2500 },
+    { month: "Feb", savings: 2000 },
+    { month: "Mar", savings: 4500 },
+    { month: "Apr", savings: 4000 },
+    { month: "May", savings: 3100 },
     { month: "Jun", savings: 4200 },
   ];
 
@@ -130,6 +130,13 @@ function TrendsData() {
     </div>
   );
 }
+function GoalsData() {
+  return (
+    <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <SetGoal />
+    </div>
+  );
+}
 // whole analytics components that consist of prev comps
 function Analytics() {
   const Gen = ["trends", "goals"];
@@ -180,7 +187,7 @@ function Analytics() {
             );
           })}
         </div>
-        <section>{see === "trends" ? <TrendsData /> : <SetGoal />}</section>
+        <section>{see === "trends" ? <TrendsData /> : <GoalsData />}</section>
       </main>
     </>
   );
