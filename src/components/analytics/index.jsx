@@ -14,22 +14,32 @@ function SavingsOverview() {
   ];
   return (
     <div>
-      <div className="OuterStyle">
+      <div className="OuterStyle flex flex-col gap-5">
         <HeadingContent
           title={"savings goals progress"}
           description={"track your progress towards your savings target"}
         />
         <div>
-          <div className="flex gap-2 flex-col ">
-            <h2 className="text-4xl text-blue-500 font-medium">$3500</h2>
-            <span className="text-gray-500">of $5000</span>
+          <div className="flex gap-2 flex-col items-center ">
+            <h2 className="text-4xl text-blue-600 font-medium">$3200</h2>
+            <span className="text-gray-400">of $5000 goal</span>
           </div>
           <div>
-            <div>
-              <label>progress</label>
+            <div className="flex justify-between">
+              <label className="capitalize">progress</label>
               <span>50%</span>
             </div>
-            <ProgressBar progress={50} />
+            <ProgressBar progress={20} />
+          </div>
+        </div>
+        <div className=" my-10 flex justify-around">
+          <div className="flex  flex-col items-center ">
+            <h2 className="text-lg text-black font-medium">$800</h2>
+            <span className="text-gray-400">monthly target</span>
+          </div>
+          <div className="flex  flex-col items-center ">
+            <h2 className="text-lg text-black font-medium">3</h2>
+            <span className="text-gray-400">months to go</span>
           </div>
         </div>
       </div>
@@ -107,13 +117,14 @@ function Analytics() {
       </header>
       <main className="flex flex-col gap-5">
         <div className="flex w-fit  capitalize justify-start gap-5 bg-gray-200  px-3 rounded-4xl">
-          {Gen.map((cat) => {
+          {Gen.map((cat, i) => {
             return (
               <button
+                key={i + 1}
                 onClick={() => {
                   setSee(cat);
                 }}
-                className={`capitalize my-2 py-1 px-5 rounded-full cursor-pointer text-base ${
+                className={`capitalize my-2 py-[0.5px] px-4 rounded-full cursor-pointer text-base ${
                   see === cat ? "bg-white" : "bg-transparent"
                 }`}
               >

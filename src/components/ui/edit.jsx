@@ -171,6 +171,7 @@ export function EditTransactions({
       type,
       amount,
       category,
+      date: new Date(),
       description: desc,
     };
     console.log("Transaction updated:", updated);
