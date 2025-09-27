@@ -9,7 +9,15 @@ const settings = () => {
           settings and options for your finances
         </p>
       </div>
-      <div className=" mt-10 md:mt-20 flex flex-col  w-full md:w-[60%] lg:w-[40%] gap-6">
+      <div className=" mt-10 md:mt-20 flex flex-col  gap-1 w-[100%] ">
+        <h2 className="capitalize text-xl font-medium">
+          personel informations :
+        </h2>
+        <p className="TextP first-letter:uppercase">
+          your personal informations
+        </p>
+      </div>
+      <div className=" mt-10 grid grid-cols-2 w-full gap-6">
         <TextField
           // sx={{ width: "40%" }}
           value={"Maria"}
@@ -26,6 +34,18 @@ const settings = () => {
           // sx={{ width: "40%" }}
           value={"software engineer"}
           label={"Your job"}
+          slotProps={{ readOnly: true }}
+        />
+        <TextField
+          // sx={{ width: "40%" }}
+          value={"24/7/2024"}
+          label={"Date of birth"}
+          slotProps={{ readOnly: true }}
+        />
+        <TextField
+          // sx={{ width: "40%" }}
+          value={"algeriar"}
+          label={"country"}
           slotProps={{ readOnly: true }}
         />
       </div>

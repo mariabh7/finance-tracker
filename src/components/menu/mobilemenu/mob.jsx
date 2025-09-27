@@ -2,7 +2,7 @@ import { menuDeep } from "../../ui/menuIcon";
 import { currencyDollar } from "../../ui/dollarIcon";
 import { GenUL } from "../menu";
 import { useState, useEffect } from "react";
-function MobMenu({ active, setActive }) {
+function MobMenu() {
   const [isOpen, setisOpen] = useState(false);
   useEffect(() => {
     const handleClick = (event) => {
@@ -44,7 +44,7 @@ function MobMenu({ active, setActive }) {
         <h1 className="capitalize flex gap-2 items-center font-medium text-2xl mb-7">
           {currencyDollar()}browse pages{" "}
         </h1>
-        <GenUL active={active} setActive={setActive} />
+        <GenUL />
       </div>
     </div>
   );
