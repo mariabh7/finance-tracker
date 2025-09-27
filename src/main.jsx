@@ -5,15 +5,17 @@ import {
   BrowserRouter,
   createBrowserRouter,
   RouterProvider,
-} from "react-router-dom";
-import { Navigate } from "react-router-dom";
+} from "react-router";
+import { Navigate } from "react-router";
 import DashBoard from "./components/dashboard/dash.jsx";
 import Transactions from "./components/transactions/trans.jsx";
 import Budget from "./components/budget/budget.jsx";
 import Analytics from "./components/analytics/index.jsx";
 import Settings from "./components/settings/settings.jsx";
 import App from "./App.jsx";
+import Signup from "./components/signUp/signup.jsx";
 const routes = createBrowserRouter([
+  { path: "/signup", element: <Signup /> },
   {
     path: "/",
     element: <App />,
