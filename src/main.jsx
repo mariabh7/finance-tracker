@@ -17,15 +17,13 @@ import Signup from "./components/signUp/signup.jsx";
 const routes = createBrowserRouter([
   { path: "/signup", element: <Signup /> },
   {
-    path: "/",
-    element: <App />,
+    Component: App,
     children: [
-      { index: true, element: <Navigate to="dashboard" replace /> },
-      { path: "dashboard", element: <DashBoard /> },
-      { path: "transactions", element: <Transactions /> },
-      { path: "budget", element: <Budget /> },
-      { path: "analytics", element: <Analytics /> },
-      { path: "settings", element: <Settings /> },
+      { index: true, Component: DashBoard },
+      { path: "transactions", Component: Transactions },
+      { path: "budget", Component: Budget },
+      { path: "analytics", Component: Analytics },
+      { path: "settings", Component: Settings },
     ],
   },
 ]);
