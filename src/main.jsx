@@ -15,9 +15,10 @@ import Settings from "./components/settings/settings.jsx";
 import App from "./App.jsx";
 import Signup from "./components/signUp/signup.jsx";
 const routes = createBrowserRouter([
+  // route objects
   { path: "/signup", element: <Signup /> },
   {
-    Component: App,
+    Component: App, // componeent that will render
     children: [
       { index: true, Component: DashBoard },
       { path: "transactions", Component: Transactions },
