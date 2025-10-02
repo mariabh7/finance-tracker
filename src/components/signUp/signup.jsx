@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Slider from "./slider";
 import { currencyDollar } from "../ui/dollarIcon";
 import { Link } from "react-router-dom";
 function SignUpForm() {
@@ -65,19 +66,12 @@ function Signup() {
             <SignUpForm />
           </div>
         </div>
-        <div className="relative my-3 mx-5  ">
+        <div className=" hidden lg:block relative my-3 mx-5  ">
           <img
-            className="hidden lg:block rounded-3xl w-full h-screen"
+            className=" rounded-3xl w-full h-screen"
             src="/public/mesh-gradient (1).png"
           ></img>
-          <div className="absolute top-0 py-5 left-[20%] overflow-y-scroll h-full ">
-            <ul className="flex w-full gap-3 flex-col">
-              <li className="temp">hello</li>
-              <li className="temp"> hello1 </li>
-              <li className="temp"> hello2</li>
-              <li className="temp"> hello3</li>
-            </ul>
-          </div>
+          <Slider></Slider>
         </div>
       </div>
     </div>

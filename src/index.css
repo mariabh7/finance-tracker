@@ -14,7 +14,7 @@
 }
 
 .temp {
-    @apply bg-white p-10 w-[400px] h-[500px] text-center
+    @apply bg-neutral-50 rounded-xl p-10 w-[400px] h-[500px] text-center
 }
 
 .Or-line {
