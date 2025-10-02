@@ -5,6 +5,26 @@
     --font-Ubuntu: "Ubuntu";
 }
 
+.class-i {
+    @apply py-3 px-3 border-2 border-gray-200 outline-0 rounded-xl capitalize
+}
+
+.single-input {
+    @apply flex flex-col gap-3
+}
+
+.temp {
+    @apply bg-white p-10 w-[400px] h-[500px] text-center
+}
+
+.Or-line {
+    @apply w-full mt-1 h-[1px] bg-gray-200;
+}
+
+.ourform>div>label {
+    @apply capitalize
+}
+
 body {
     @apply font-Ubuntu bg-white
 }
