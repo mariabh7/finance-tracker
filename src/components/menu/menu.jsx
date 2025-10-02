@@ -19,7 +19,7 @@ export function GenUL() {
       <ul className="flex flex-col justify-normal gap-5">
         {NavItems.map((item) => (
           <NavLink
-            to={`/${item.item != "dashboard" ? item.item : ""}`}
+            to={`/app/${item.item}`}
             key={item.item}
             className={({ isActive }) =>
               `lis ${isActive ? "activeItem" : "NvItem hover:bg-gray-100"}`

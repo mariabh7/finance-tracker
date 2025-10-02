@@ -16,8 +16,13 @@ import App from "./App.jsx";
 import Signup from "./components/signUp/signup.jsx";
 import { SignUpForm } from "./components/signUp/signup.jsx";
 import { LogInForm } from "./components/signUp/signup.jsx";
+import Landingpage from "./components/landingPage/landingpage.jsx";
 const routes = createBrowserRouter([
   // route objects
+  {
+    path: "/",
+    Component: Landingpage,
+  },
   {
     path: "/auth",
     Component: Signup,
@@ -27,9 +32,11 @@ const routes = createBrowserRouter([
     ],
   },
   {
+    path: "/app",
     Component: App, // componeent that will render
     children: [
-      { index: true, Component: DashBoard },
+      { index: true, element: <Navigate to={"/app/dashboard"} /> },
+      { path: "dashboard", Component: DashBoard },
       { path: "transactions", Component: Transactions },
       { path: "budget", Component: Budget },
       { path: "analytics", Component: Analytics },
