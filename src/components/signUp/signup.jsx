@@ -32,7 +32,7 @@ function SignUpForm() {
         create account
       </button>
       <div className="flex mt-3 justify-start capitalize gap-2 ">
-        <p className="text-gray-400">already have an account ?</p>
+        <p className="text-gray-400 ">already have an account ?</p>
         <Link className="underline" to={"/analytics"}>
           log in here{" "}
         </Link>
@@ -44,8 +44,8 @@ function Signup() {
   const [switchs, setSwitchs] = useState("w-[20%]");
   return (
     <div className="p-3 ">
-      <div className="grid grid-cols-[48%_52%] ">
-        <div className="flex my-5  mx-20 flex-col gap-16 ">
+      <div className="grid grid-cols-1 lg:grid-cols-[48%_52%] ">
+        <div className="flex my-5 mx-5 md:mx-20 flex-col gap-16 ">
           <div className="flex justify-items-start gap-2 items-center">
             {currencyDollar()}
             <h1 className="capitalize font-medium text-3xl">finance tracker</h1>
