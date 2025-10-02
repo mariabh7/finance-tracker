@@ -3,6 +3,17 @@
 
 @theme {
     --font-Ubuntu: "Ubuntu";
+    --color-bg: var(--bgColor);
+    --color-text: var(--textColor);
+}
+
+:root {
+    --bgColor: white;
+    --textColor: black;
+    background-color: var(--color-bg);
+    font-family: var(--font-Ubuntu);
+    color: var(--textColor);
+
 }
 
 .class-i {
@@ -25,9 +36,6 @@
     @apply capitalize
 }
 
-body {
-    @apply font-Ubuntu bg-white
-}
 
 .activeItem {
     @apply bg-black text-white;
