@@ -39,17 +39,17 @@ const Landingpage = () => {
         </section>
         <section data-slot="dashBoard-view" className="my-38 relative ">
           <div className="grid grid-cols-2 ">
-            <div>
-              <h3>Dashboard Overview </h3>
-              <p>
+            <div className="p-10 flex flex-col gap-10">
+              <h3 className="text-3xl font-medium">Dashboard Overview </h3>
+              <p className="text-gray-500 text-xl ">
                 Get a clear snapshot of your finances in one place. The
                 dashboard provides real-time insights into your income,
-                expenses, and savings — helping you stay in control and make
+                expenses, and savings , helping you stay in control and make
                 smarter financial decisions
               </p>
             </div>
-            <div data-slot="Preview" className="">
-              <img src="/dashboard.png" />
+            <div data-slot="Preview" className=" self-end w-full">
+              <img src="/dash.png" />
             </div>
           </div>
         </section>
