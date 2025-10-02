@@ -14,9 +14,18 @@ import Analytics from "./components/analytics/index.jsx";
 import Settings from "./components/settings/settings.jsx";
 import App from "./App.jsx";
 import Signup from "./components/signUp/signup.jsx";
+import { SignUpForm } from "./components/signUp/signup.jsx";
+import { LogInForm } from "./components/signUp/signup.jsx";
 const routes = createBrowserRouter([
   // route objects
-  { path: "/signup", element: <Signup /> },
+  {
+    path: "/auth",
+    Component: Signup,
+    children: [
+      { index: true, path: "signup", Component: SignUpForm },
+      { path: "login", Component: LogInForm },
+    ],
+  },
   {
     Component: App, // componeent that will render
     children: [

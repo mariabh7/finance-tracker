@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import Slider from "./slider";
+import { Outlet } from "react-router-dom";
 import { currencyDollar } from "../ui/dollarIcon";
 import { Link } from "react-router-dom";
-function SignUpForm() {
+export function SignUpForm() {
   return (
     <form className="flex flex-col gap-2   ourform">
       <div className="single-input">
@@ -33,8 +34,38 @@ function SignUpForm() {
       </button>
       <div className="flex mt-3 justify-start capitalize gap-2 ">
         <p className="text-gray-400 ">already have an account ?</p>
-        <Link className="underline" to={"/analytics"}>
+        <Link className="underline" to={"/auth/login"}>
           log in here{" "}
+        </Link>
+      </div>
+    </form>
+  );
+}
+export function LogInForm() {
+  return (
+    <form className="flex flex-col gap-2   ourform">
+      <div className="single-input">
+        <label htmlFor="email">email</label>
+        <input id="email" placeholder="enter your email" className="class-i" />
+      </div>
+      <div className="single-input">
+        <label htmlFor="password">password</label>
+        <input
+          id="password"
+          placeholder="enter your password"
+          className="class-i"
+        />
+      </div>
+      <button
+        type="submit"
+        className="px-2 mt-3 py-4 w-full text-base bg-black text-white text-center capitalize rounded-xl cursor-pointer"
+      >
+        Log into your account
+      </button>
+      <div className="flex mt-3 justify-start capitalize gap-2 ">
+        <p className="text-gray-400 ">don't have an account?</p>
+        <Link className="underline" to={"/auth/signup"}>
+          sign up here{" "}
         </Link>
       </div>
     </form>
@@ -56,14 +87,16 @@ function Signup() {
           >
             <div data-container="google-log-in" className="w-full relative">
               <button className="flex justify-center border-gray-200 py-3 capitalize border-2 rounded-xl  w-full items-center gap-3 ">
-                <img className="w-5" src="public/Group.svg"></img>
-                <span>sign in with google</span>
+                <img className="w-5" src="/Group.svg"></img>
+                <span>continue with google</span>
               </button>
               <p className="border-b-[1px] text-center border-gray-200 leading-1 my-5 w-full">
                 <span className="bg-white text-gray-400 p-3 ">or</span>
               </p>
             </div>
-            <SignUpForm />
+            <div>
+              <Outlet />
+            </div>
           </div>
         </div>
         <div className=" hidden lg:block relative my-3 mx-5  ">
