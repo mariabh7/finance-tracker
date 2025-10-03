@@ -96,7 +96,7 @@ const Slider = () => {
   }, []);
   return (
     <div className="absolute top-0  py-5 left-[22%] overflow-hidden h-full ">
-      <ul className="flex gap-2 h-fit flex-col scroll-list ">
+      <ul className="flex gap-10 h-fit flex-col scroll-list ">
         {data.map((item, index) => {
           return (
             <li

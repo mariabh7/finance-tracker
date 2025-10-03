@@ -25,7 +25,7 @@
 }
 
 .temp {
-    @apply bg-white rounded-xl p-10 w-[400px] h-[500px] text-center
+    @apply bg-white shadow-xl rounded-xl p-10 w-[400px] h-[500px] text-center
 }
 
 .Or-line {
@@ -51,12 +51,10 @@
 
 .sq {
     background-color: #fff;
-    /* or any base color */
     background-image:
         linear-gradient(to right, #e5e7eb 1px, transparent 1px),
         linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
-    background-size: 50px 50px;
-    /* size of each square */
+    background-size: 60px 60px;
 }
 
 @keyframes animate {

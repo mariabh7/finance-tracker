@@ -76,7 +76,7 @@ function Signup() {
   return (
     <div className="p-3 ">
       <div className="grid grid-cols-1 lg:grid-cols-[48%_52%] ">
-        <div className="flex my-5 mx-5 md:mx-20 flex-col gap-16 ">
+        <div className="flex my-5 mx-5 md:mx-20 flex-col gap-14 ">
           <div className="flex justify-items-start gap-2 items-center">
             {currencyDollar()}
             <h1 className="capitalize font-medium text-3xl">finance tracker</h1>
@@ -99,11 +99,7 @@ function Signup() {
             </div>
           </div>
         </div>
-        <div className=" hidden lg:block relative my-1 mx-5  ">
-          <img
-            className=" rounded-3xl w-full h-full"
-            src="/mesh-gradient (1).png"
-          ></img>
+        <div className=" hidden sq h-screen lg:block relative my-1 mx-5  ">
           <Slider></Slider>
         </div>
       </div>
