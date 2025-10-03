@@ -49,6 +49,29 @@
     @apply text-base text-gray-500
 }
 
+@keyframes animate {
+    0% {
+        transform: translateY(0%);
+        -webkit-transform: translateY(0%);
+        -moz-transform: translateY(0%);
+        -ms-transform: translateY(0%);
+        -o-transform: translateY(0%);
+    }
+
+    100% {
+        transform: translateY(-75%);
+        -webkit-transform: translateY(-75%);
+        -moz-transform: translateY(-75%);
+        -ms-transform: translateY(-75%);
+        -o-transform: translateY(-75%);
+    }
+}
+
+.scroll-list {
+    animation: animate 20s linear infinite;
+    -webkit-animation: animate 20s linear infinite;
+}
+
 .OuterStyle {
     @apply w-full rounded-2xl border-2 border-gray-200 p-4 md:p-6
 }
