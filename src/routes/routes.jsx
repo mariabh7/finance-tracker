@@ -14,11 +14,13 @@ import App from "../App.jsx";
 import Signup from "../components/signUp/signup.jsx";
 import { SignUpForm } from "../components/signUp/signup.jsx";
 import { LogInForm } from "../components/signUp/signup.jsx";
+import ErrorPage from "../components/Error/error.jsx";
 import Landingpage from "../components/landingPage/landingpage.jsx";
 const routes = createBrowserRouter([
   // route objects
   {
     path: "/",
+    errorElement: <ErrorPage />,
     Component: Landingpage,
   },
   {
@@ -31,6 +33,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/app",
+
     Component: App, // componeent that will render
     children: [
       { index: true, element: <Navigate to={"/app/dashboard"} /> },
