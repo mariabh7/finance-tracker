@@ -49,6 +49,16 @@
     @apply text-base text-gray-500
 }
 
+.sq {
+    background-color: #fff;
+    /* or any base color */
+    background-image:
+        linear-gradient(to right, #e5e7eb 1px, transparent 1px),
+        linear-gradient(to bottom, #e5e7eb 1px, transparent 1px);
+    background-size: 50px 50px;
+    /* size of each square */
+}
+
 @keyframes animate {
     0% {
         transform: translateY(0%);
