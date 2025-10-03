@@ -5,17 +5,22 @@ import { Link } from "react-router-dom";
 function InfoSection({ imgs, title, desc, pos }) {
   const check = pos.includes("left") ? true : false;
   return (
-    <section data-slot="dashBoard-view" className="mt-20 mb-96 relative">
+    <section
+      data-slot="dashBoard-view"
+      className="mt-10 lg:mt-20 mb-10 lg:mb-96 relative"
+    >
       <div
-        className={`flex justify-between ${check ? "flex-row-reverse" : ""}`}
+        className={`flex justify-between ${check ? "lg:flex-row-reverse" : ""}`}
       >
-        <div className="p-6 flex w-[50%] self-end flex-col  gap-3">
-          <h3 className="text-3xl capitalize font-medium">{title}</h3>
-          <p className="text-gray-400 text-[22px] ">{desc}</p>
+        <div className="p-6 flex w-full md:w-[80%] lg:w-[50%] self-end flex-col  gap-3">
+          <h3 className=" text-2xl md:text-3xl capitalize font-medium">
+            {title}
+          </h3>
+          <p className="text-gray-400 text-lg md:text-[22px] ">{desc}</p>
         </div>
         <div
           data-slot="Preview"
-          className={`absolute -top-20 ${pos} self-end w-[670px]`}
+          className={`absolute hidden lg:block -top-20 ${pos} self-end w-[670px]`}
         >
           <img src={imgs} className="shadow-2xl rounded-3xl" />
         </div>
@@ -51,14 +56,14 @@ const Landingpage = () => {
             </button>
           </div>
         </header>
-        <main className="my-28">
+        <main className=" my-20 md:my-28">
           <section
             ref={Sectionref}
             data-slot="getStartedWithUs"
-            className=" mt-44 mb-64 flex flex-col gap-10 justify-center items-center"
+            className="mt-26 md:mt-44 mb-30 md:mb-64 flex flex-col gap-10 justify-center items-center"
           >
             <div className=" w-[90%] lg:w-[50%] text-center">
-              <h1 className="font-semibold first-letter:uppercase text-4xl">
+              <h1 className="font-semibold first-letter:uppercase text-2xl md:text-4xl">
                 Get started with Finance Tracker and ensure an efficient way to
                 manage your daily finances.
               </h1>
@@ -93,7 +98,7 @@ const Landingpage = () => {
             }
             pos={"-right-32"}
           />
-          <section className="text-center flex flex-col items-center justify-center gap-20 my-54">
+          <section className="text-center flex flex-col items-center justify-center gap-10 md:gap-20 my-24 md:my-54">
             <h4 className="text-3xl capitalize font-medium">
               what are you waiting for ? get started{" "}
             </h4>

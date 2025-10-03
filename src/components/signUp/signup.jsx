@@ -30,7 +30,7 @@ export function SignUpForm() {
         type="submit"
         className="px-2 mt-3 py-4 w-full text-base bg-black text-white text-center capitalize rounded-xl cursor-pointer"
       >
-        create account
+        <Link to={"/app"}>create account</Link>
       </button>
       <div className="flex mt-3 justify-start capitalize gap-2 ">
         <p className="text-gray-400 ">already have an account ?</p>
@@ -94,7 +94,7 @@ function Signup() {
                 <span className="bg-white text-gray-400 p-3 ">or</span>
               </p>
             </div>
-            <div>
+            <div data-container="formTofill">
               <Outlet />
             </div>
           </div>
