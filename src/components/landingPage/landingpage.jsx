@@ -2,6 +2,7 @@ import React from "react";
 import { currencyDollar } from "../ui/dollarIcon";
 import { Link } from "react-router-dom";
 const Landingpage = () => {
+  console.log("Component rendered");
   return (
     <div className="my-10  mx-3 md:mx-20 ">
       <header className="flex justify-between items-center">

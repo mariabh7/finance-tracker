@@ -93,7 +93,7 @@ const Slider = () => {
     return () => clearInterval(interval);
   }, []);
   return (
-    <div className="absolute top-0  py-5 left-[20%] overflow-hidden h-full ">
+    <div className="absolute top-0  py-5 left-[22%] overflow-hidden h-full ">
       <ul className="flex gap-2 h-fit flex-col">
         {data.map((item, index) => {
           return (

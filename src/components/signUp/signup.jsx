@@ -102,7 +102,7 @@ function Signup() {
         <div className=" hidden lg:block relative my-1 mx-5  ">
           <img
             className=" rounded-3xl w-full h-full"
-            src="/public/mesh-gradient (1).png"
+            src="/mesh-gradient (1).png"
           ></img>
           <Slider></Slider>
         </div>
