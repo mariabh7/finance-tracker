@@ -7,7 +7,7 @@ const data = [
     content: {
       comment:
         "this finance tracker is really well done! The layout is clean and intuitive, which makes it easy to follow where the money goes. I like how things are organized here, and the automatic updates give a smooth experience. It’s simple enough for a beginner to use",
-      UserName: "maria bouhrem",
+      UserName: "maria",
     },
   },
   {

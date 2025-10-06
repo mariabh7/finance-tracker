@@ -117,7 +117,7 @@ export default function EditBudgetElement({
           height: "100%",
         }}
       >
-        <div className="mt-5 flex flex-col gap-5">
+        <form className="mt-5 flex flex-col gap-5">
           <CustimizedSelect
             value={category}
             option={Availablecategories}
@@ -141,7 +141,7 @@ export default function EditBudgetElement({
           >
             {action}
           </button>
-        </div>
+        </form>
       </DialogContent>
     </Dialog>
   );
@@ -208,7 +208,7 @@ export function EditTransactions({
           height: "100%",
         }}
       >
-        <div className="mt-5 flex flex-col gap-5">
+        <form className="mt-5 flex flex-col gap-5">
           <div className="grid grid-cols-2 gap-5">
             <CustimizedSelect
               value={type}
@@ -237,7 +237,7 @@ export function EditTransactions({
           >
             {action}
           </button>
-        </div>
+        </form>
       </DialogContent>
     </Dialog>
   );
