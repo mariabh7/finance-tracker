@@ -36,7 +36,7 @@ export function GenUL() {
       </ul>
       <div className="">
         <NavLink
-          to={`/settings`}
+          to={`/app/settings`}
           className={"lis NvItem justify-self-end w-full hover:bg-gray-100"}
         >
           {settings()}

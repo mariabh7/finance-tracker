@@ -29,22 +29,27 @@ export const edit = () => {
   );
 };
 
-function CustimizedSelect({ value, option, role, onChange }) {
+function CustimizedSelect({ value, option, role, onChange, name }) {
   return (
-    <Autocomplete
-      value={value}
-      id="controllable-states-demo"
-      onChange={(event, newValue) => onChange(newValue)}
-      options={option}
-      sx={{ width: "100%" }}
-      renderInput={(params) => <TextField {...params} label={role} />}
-    />
+    <>
+      <Autocomplete
+        value={value}
+        id="controllable-states-demo"
+        onChange={(event, newValue) => onChange(newValue)}
+        options={option}
+        sx={{ width: "100%" }}
+        renderInput={(params) => (
+          <TextField name={name ?? "name"} {...params} label={role} />
+        )}
+      ></Autocomplete>
+    </>
   );
 }
 
 function NumberInput({ title, value, onChange }) {
   return (
     <TextField
+      name="number"
       label={title}
       value={value}
       onChange={(e) => onChange(e.target.value)}
@@ -76,14 +81,19 @@ export default function EditBudgetElement({
     setLimit(actualElement?.total || 0);
     setPeriod(actualElement?.period || "");
   }, [actualElement]);
-  const handleSubmit = () => {
-    const updated = {
-      ...actualElement,
-      item: category,
-      total: limit,
-      period,
-    };
-    console.log("Budget updated:", updated);
+  const handleSubmit = (formData) => {
+    console.log(
+      formData.get("number"),
+      formData.get("category"),
+      formData.get("period")
+    );
+    // const updated = {
+    //   ...actualElement,
+    //   item: category,
+    //   total: limit,
+    //   period,
+    // };
+    // console.log("Budget updated:", updated);
     setOpen(false);
   };
 
@@ -117,11 +127,12 @@ export default function EditBudgetElement({
           height: "100%",
         }}
       >
-        <form className="mt-5 flex flex-col gap-5">
+        <form className="mt-5 flex flex-col gap-5" action={handleSubmit}>
           <CustimizedSelect
             value={category}
             option={Availablecategories}
             role={"Budget Category"}
+            name={"category"}
             onChange={setCategory}
           />
           <NumberInput
@@ -131,12 +142,13 @@ export default function EditBudgetElement({
           />
           <CustimizedSelect
             value={period}
+            name={"period"}
             option={Plans}
             role={"Period"}
             onChange={setPeriod}
           />
           <button
-            onClick={handleSubmit}
+            type="submit"
             className="bg-black cursor-pointer p-2 capitalize rounded-lg w-full text-white text-center"
           >
             {action}
@@ -165,16 +177,17 @@ export function EditTransactions({
     setDesc(actualElement?.description || "");
   }, [actualElement]);
 
-  const handleSubmit = () => {
-    const updated = {
-      ...actualElement,
-      type,
-      amount,
-      category,
-      date: new Date(),
-      description: desc,
-    };
-    console.log("Transaction updated:", updated);
+  const handleSubmit = (formData) => {
+    console.log(formData.get("number"));
+    // const updated = {
+    //   ...actualElement,
+    //   type,
+    //   amount,
+    //   category,
+    //   date: new Date(),
+    //   description: desc,
+    // };
+    // console.log("Transaction updated:", updated);
     setModalOpen(false);
   };
 
@@ -208,7 +221,7 @@ export function EditTransactions({
           height: "100%",
         }}
       >
-        <form className="mt-5 flex flex-col gap-5">
+        <form className="mt-5 flex flex-col gap-5" action={handleSubmit}>
           <div className="grid grid-cols-2 gap-5">
             <CustimizedSelect
               value={type}
@@ -232,7 +245,7 @@ export function EditTransactions({
             variant="outlined"
           />
           <button
-            onClick={handleSubmit}
+            type="submit"
             className="bg-black cursor-pointer p-2 capitalize rounded-lg w-full text-white text-center"
           >
             {action}
