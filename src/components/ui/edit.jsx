@@ -29,7 +29,7 @@ export const edit = () => {
   );
 };
 
-function CustimizedSelect({ value, option, role, onChange, name }) {
+function CustimizedSelect({ value, option, role, onChange }) {
   return (
     <>
       <Autocomplete
@@ -39,7 +39,7 @@ function CustimizedSelect({ value, option, role, onChange, name }) {
         options={option}
         sx={{ width: "100%" }}
         renderInput={(params) => (
-          <TextField name={name ?? "name"} {...params} label={role} />
+          <TextField name={role ?? "name"} {...params} label={role} />
         )}
       ></Autocomplete>
     </>
@@ -84,8 +84,8 @@ export default function EditBudgetElement({
   const handleSubmit = (formData) => {
     console.log(
       formData.get("number"),
-      formData.get("category"),
-      formData.get("period")
+      formData.get("Budget Category"),
+      formData.get("Period")
     );
     // const updated = {
     //   ...actualElement,
@@ -132,7 +132,6 @@ export default function EditBudgetElement({
             value={category}
             option={Availablecategories}
             role={"Budget Category"}
-            name={"category"}
             onChange={setCategory}
           />
           <NumberInput
@@ -142,7 +141,6 @@ export default function EditBudgetElement({
           />
           <CustimizedSelect
             value={period}
-            name={"period"}
             option={Plans}
             role={"Period"}
             onChange={setPeriod}
@@ -178,7 +176,12 @@ export function EditTransactions({
   }, [actualElement]);
 
   const handleSubmit = (formData) => {
-    console.log(formData.get("number"));
+    console.log(
+      formData.get("number"),
+      formData.get("type"),
+      formData.get("category"),
+      formData.get("desc")
+    );
     // const updated = {
     //   ...actualElement,
     //   type,
@@ -240,6 +243,7 @@ export function EditTransactions({
           <TextField
             id="outlined-basic"
             label="description"
+            name="desc"
             value={desc}
             onChange={(e) => setDesc(e.target.value)}
             variant="outlined"
