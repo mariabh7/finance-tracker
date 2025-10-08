@@ -84,16 +84,7 @@ function DisplayStatistic({ Content = {} }) {
   );
 }
 const Slider = () => {
-  const [current, setCurrent] = useState(0);
-  const Container = useRef();
   const element = useRef();
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % data.length);
-    }, 3000);
-    console.log(element.current);
-    return () => clearInterval(interval);
-  }, []);
   return (
     <div className="absolute top-0  py-5 left-[22%] overflow-hidden h-full ">
       <ul className="flex gap-10 h-fit flex-col scroll-list ">

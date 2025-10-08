@@ -13,13 +13,12 @@ import { circleArrowUp } from "../ui/arrowup";
 import { circleArrowDown } from "../ui/arrowdown";
 import { getTotal } from "../data/data";
 import { updateBudget } from "../data/data";
-import { useState } from "react";
+import { useReducer, useState } from "react";
 import { EditTransactions } from "../ui/edit";
-function TransactionsTable({ setopen, setTransConfig }) {
+function TransactionsTable({ setopen, Transdispatch }) {
   const handleEditting = (item) => {
-    setTransConfig({
+    Transdispatch({
       action: "edit transaction ",
-      description: "update your transactions details ",
       item: item,
     });
     setopen(true);
@@ -88,22 +87,43 @@ function TransactionsTable({ setopen, setTransConfig }) {
     </>
   );
 }
+function configer(config, action) {
+  if (action.type === "add transaction") {
+    return {
+      action: "add transaction",
+      description: "add a new income or expense transaction",
+      item: action.item ?? {},
+    };
+  } else {
+    return {
+      action: "edit transaction",
+      description: "add a new income or expense transaction",
+      item: action.item,
+    };
+  }
+}
 function MainContainer() {
   const [open, setOpens] = useState(false);
-  const [TransConfig, setTransConfig] = useState({
+  const initialState = {
     action: "",
     description: "",
     item: {},
-  });
+  };
+  const [TransConfig, dispatch] = useReducer(configer, initialState);
+  // const [TransConfig, setTransConfig] = useState({
+  //   action: "",
+  //   description: "",
+  //   item: {},
+  // });
   const handleAddingTransaction = () => {
-    setTransConfig({
-      action: "add transaction ",
-      description: "add a new income or expense transaction",
+    dispatch({
+      action: "add transaction",
+      item: {},
     });
     setOpens(true);
   };
   return (
-    <main className="OuterStyle flex flex-col justify-start gap-6 md:gap-10">
+    <main className="OuterStyle flex  flex-col justify-start gap-6 md:gap-10">
       <div className="flex justify-between items-center align-baseline ">
         <div className="flex flex-col gap-1 w-[50%] ">
           <h1 className="capitalize text-lg font-medium">transactions </h1>
@@ -121,7 +141,7 @@ function MainContainer() {
         </div>
       </div>
       <section>
-        <TransactionsTable setopen={setOpens} setTransConfig={setTransConfig} />
+        <TransactionsTable setopen={setOpens} Transdispatch={dispatch} />
         <EditTransactions
           action={TransConfig.action}
           description={TransConfig.description}
