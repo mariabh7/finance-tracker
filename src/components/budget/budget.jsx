@@ -5,7 +5,7 @@ import { plus } from "../ui/addIcon";
 import EditBudgetElement, { edit } from "../ui/edit";
 import { trash } from "../ui/remove";
 import { Categories } from "../data/data";
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import ProgressBar from "../ui/Progress";
 function BudgetOverView({ Budgets = [] }) {
   const TotalBudget = Budgets?.map((item) => item.total)?.reduce(
@@ -191,12 +191,14 @@ export default function Budget() {
   return (
     <>
       <BudgetOverView Budgets={Categories} />
-      <BudgetCategories
-        budgets={Categories}
-        setopen={setOpen}
-        setCurrent={setCurrent}
-        setconfig={setConfig}
-      />
+      <Suspense fallback={<h2>loading content</h2>}>
+        <BudgetCategories
+          budgets={Categories}
+          setopen={setOpen}
+          setCurrent={setCurrent}
+          setconfig={setConfig}
+        />
+      </Suspense>
       <EditBudgetElement
         action={config.action}
         description={config.description}
