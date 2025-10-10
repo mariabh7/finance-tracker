@@ -113,9 +113,9 @@ const Landingpage = () => {
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="#000000"
-                stroke-width="1.75"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 <path d="M12 5v6m0 3v1.5m0 3v.5" />
                 <path d="M16 9l-4 -4" />
