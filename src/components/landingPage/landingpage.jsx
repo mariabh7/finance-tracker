@@ -1,6 +1,7 @@
 import React, { useRef } from "react";
 import { currencyDollar } from "../ui/dollarIcon";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 function InfoSection({ imgs, title, desc, pos }) {
   const check = pos.includes("left") ? true : false;

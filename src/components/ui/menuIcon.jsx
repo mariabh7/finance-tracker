@@ -1,12 +1,13 @@
 import React from "react";
 
-export const menuDeep = () => {
+export default function MenuDeep({ ref }) {
   return (
     //     <!--
     // version: "2.24"
     // unicode: "fafb"
     // -->
     <svg
+      ref={ref}
       className="icon"
       aria-hidden="true"
       xmlns="http://www.w3.org/2000/svg"
@@ -24,4 +25,4 @@ export const menuDeep = () => {
       <path d="M10 18h10" />
     </svg>
   );
-};
+}

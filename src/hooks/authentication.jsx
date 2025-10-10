@@ -26,6 +26,7 @@ const useCheckInputs = () => {
       if (!job) errors.job = "required field";
     }
     if (Object.keys(errors).length === 0) {
+      localStorage.setItem("logged", true);
       navigate(type === "signup" ? "/auth/login" : "/app");
     } else {
       for (let [key, msg] of Object.entries(errors)) {

@@ -1,23 +1,22 @@
-import { menuDeep } from "../../ui/menuIcon";
+import MenuDeep from "../../ui/menuIcon";
 import { currencyDollar } from "../../ui/dollarIcon";
 import { GenUL } from "../menu";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 function MobMenu() {
+  const menu = useRef();
   const [isOpen, setisOpen] = useState(false);
   useEffect(() => {
     const handleClick = (event) => {
-      if (
-        event.target !== document.querySelector(".mobile") &&
-        event.target !== document.querySelector(".icon")
-      ) {
+      console.log(event.target);
+      if (event.target !== menu.current) {
         setisOpen(false);
       }
     };
 
-    window.addEventListener("click", handleClick);
+    document.addEventListener("click", handleClick);
 
     return () => {
-      window.removeEventListener("click", handleClick);
+      document.removeEventListener("click", handleClick);
     };
   }, []);
 
@@ -29,11 +28,13 @@ function MobMenu() {
           <h1 className="capitalize font-medium text-2xl">finance tracker</h1>
         </div>
         <div
+          className="cursor-pointer"
           onClick={() => {
+            console.log(menu.current);
             setisOpen(true);
           }}
         >
-          {menuDeep()}
+          <MenuDeep ref={menu} />
         </div>
       </header>
       <div
