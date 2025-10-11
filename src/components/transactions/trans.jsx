@@ -18,7 +18,7 @@ import { EditTransactions } from "../ui/edit";
 function TransactionsTable({ setopen, Transdispatch }) {
   const handleEditting = (item) => {
     Transdispatch({
-      action: "edit transaction ",
+      type: "edit transaction ",
       item: item,
     });
     setopen(true);
@@ -87,14 +87,16 @@ function TransactionsTable({ setopen, Transdispatch }) {
     </>
   );
 }
-function configer(config, action) {
-  if (action.type === "add transaction") {
+function configer(e, action) {
+  if (action.type == "add") {
+    console.log(action.type);
     return {
       action: "add transaction",
       description: "add a new income or expense transaction",
       item: action.item ?? {},
     };
   } else {
+    console.log(action.type);
     return {
       action: "edit transaction",
       description: "add a new income or expense transaction",
@@ -117,7 +119,7 @@ function MainContainer() {
   // });
   const handleAddingTransaction = () => {
     dispatch({
-      action: "add transaction",
+      type: "add",
       item: {},
     });
     setOpens(true);
