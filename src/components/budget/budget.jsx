@@ -4,6 +4,8 @@ import Snackbar from "@mui/material/Snackbar";
 import { plus } from "../ui/addIcon";
 import EditBudgetElement, { edit } from "../ui/edit";
 import { trash } from "../ui/remove";
+import { useContext } from "react";
+import { CategoriesData } from "../../App";
 import { Categories } from "../data/data";
 import { Suspense, useEffect, useState } from "react";
 import ProgressBar from "../ui/Progress";
@@ -141,6 +143,11 @@ function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
   );
 }
 function BudgetCategories({ budgets, setopen, setCurrent, setconfig }) {
+  const [b, setb] = useState([]);
+  const bud = useContext(CategoriesData);
+  useEffect(() => {
+    setb(bud);
+  }, [bud]);
   const handleAdding = () => {
     setCurrent({});
     setopen(true);
@@ -168,17 +175,21 @@ function BudgetCategories({ budgets, setopen, setCurrent, setconfig }) {
         </div>
       </div>
       <section>
-        <ul className="flex flex-col  gap-6">
-          {Categories?.map((Category) => (
-            <SingleItem
-              key={Category.itemId}
-              Sitem={Category}
-              setOpen={setopen}
-              setCurrent={setCurrent}
-              setDiagonaleConfig={setconfig}
-            />
-          ))}
-        </ul>
+        {b.length === 0 ? (
+          <h2>waiting for data........ </h2>
+        ) : (
+          <ul className="flex flex-col  gap-6">
+            {b?.map((Category) => (
+              <SingleItem
+                key={Category.itemId}
+                Sitem={Category}
+                setOpen={setopen}
+                setCurrent={setCurrent}
+                setDiagonaleConfig={setconfig}
+              />
+            ))}
+          </ul>
+        )}
       </section>
     </main>
   );

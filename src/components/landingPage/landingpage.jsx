@@ -71,7 +71,7 @@ const Landingpage = () => {
             </div>
             <div className=" w-[40%] lg:w-[20%]">
               <button className="p-4  w-full px-3 md:px-10 bg-black text-white rounded-2xl border-2  border-black text-center capitalize text-xl">
-                <Link to={"/auth/signup"}>get started </Link>
+                <Link to={"auth/signup"}>get started </Link>
               </button>
             </div>
           </section>

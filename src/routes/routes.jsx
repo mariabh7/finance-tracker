@@ -20,12 +20,13 @@ const routes = createBrowserRouter([
   // route objects
   {
     path: "/",
-    errorElement: <ErrorPage />,
     Component: Landingpage,
+    errorElement: <ErrorPage />,
   },
   {
     path: "/auth",
     Component: Signup,
+    // chidlren need outlet to be displayed otherwise only signup will show up (docs)
     children: [
       { index: true, path: "signup", Component: SignUpForm },
       { path: "login", Component: LogInForm },
@@ -36,12 +37,12 @@ const routes = createBrowserRouter([
 
     Component: App, // componeent that will render
     children: [
-      { index: true, element: <Navigate to={"/app/dashboard"} /> },
-      { path: "dashboard", Component: DashBoard },
-      { path: "transactions", Component: Transactions },
-      { path: "budget", Component: Budget },
-      { path: "analytics", Component: Analytics },
-      { path: "settings", Component: Settings },
+      { index: true, element: <Navigate to="/app/dashboard" /> },
+      { path: "dashboard", element: <DashBoard /> },
+      { path: "transactions", element: <Transactions /> },
+      { path: "budget", element: <Budget /> },
+      { path: "analytics", element: <Analytics /> },
+      { path: "settings", element: <Settings /> },
     ],
   },
 ]);
