@@ -127,7 +127,7 @@ function MainContainer() {
   return (
     <main className="OuterStyle flex  flex-col justify-start gap-6 md:gap-10">
       <div className="flex justify-between items-center align-baseline ">
-        <div className="flex flex-col gap-1 w-[50%] ">
+        <div className="space-y-1.5 w-[50%] ">
           <h1 className="capitalize text-lg font-medium">transactions </h1>
           <p className="TextP first-letter:uppercase">
             manage your income and expenses{" "}

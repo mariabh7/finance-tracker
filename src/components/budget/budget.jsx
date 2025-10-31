@@ -22,7 +22,7 @@ function BudgetOverView({ Budgets = [] }) {
   const color = pers <= 79 ? "text-green-600" : "text-amber-600";
   return (
     <header className="OuterStyle flex flex-col justify-start gap-6 md:gap-10">
-      <div className="flex flex-col gap-1 ">
+      <div className="space-y-1.5">
         <div className="flex justify-start gap-2 items-center ">
           {chartArcs("black")}
           <h1 className="capitalize text-lg font-medium">budget overview </h1>
@@ -102,7 +102,7 @@ function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
   return (
     <li className="w-full rounded-2xl border-2 border-gray-200 p-4">
       <div className="flex justify-between items-center">
-        <div className="flex flex-col gap-0 w-[50%] ">
+        <div className="space-y-1.5 w-[50%] ">
           <h1 className="capitalize text-base md:text-lg font-medium">
             {Sitem.item}
           </h1>
@@ -159,7 +159,7 @@ function BudgetCategories({ budgets, setopen, setCurrent, setconfig }) {
   return (
     <main className="OuterStyle flex flex-col justify-start gap-6 md:gap-10">
       <div className="flex justify-between items-center ">
-        <div className="flex flex-col gap-1 w-[50%] ">
+        <div className="space-y-1.5 w-[50%] ">
           <h1 className="capitalize text-lg font-medium">budget overview </h1>
           <p className="TextP first-letter:uppercase">
             track your spending agains your budget limit{" "}
