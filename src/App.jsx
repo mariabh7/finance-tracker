@@ -7,7 +7,7 @@ async function data() {
   return new Promise((resolve) => {
     setTimeout(() => {
       resolve(Categories);
-    }, 5000);
+    }, 10000);
   });
 }
 export default function App() {

@@ -11,10 +11,10 @@ import { Suspense, useEffect, useState } from "react";
 import ProgressBar from "../ui/Progress";
 function BudgetOverView({ Budgets = [] }) {
   const TotalBudget = Budgets?.map((item) => item.total)?.reduce(
-    (sum, next) => sum + next
+    (sum, next) => sum + next,
   );
   const TotalSpent = Budgets?.map((item) => item.paid)?.reduce(
-    (sum, next) => sum + next
+    (sum, next) => sum + next,
   );
 
   const pers =
@@ -87,6 +87,7 @@ function DeleteButton({ openSnack, setOpensnack, item }) {
 }
 function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
   const [openSnack, setOpensnack] = useState(false);
+
   function handlChange(Current) {
     setCurrent(Current);
     setDiagonaleConfig({
