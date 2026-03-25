@@ -3,20 +3,29 @@ import { Outlet } from "react-router-dom";
 import { Categories } from "./components/data/data.jsx";
 import Navigation from "./components/menu/menu.jsx";
 export const CategoriesData = createContext();
-async function data() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      resolve(Categories);
-    }, 10000);
+import { instance } from "./components/data/data.jsx";
+import { configDotenv } from "dotenv";
+const getData = async () => {
+  const data = await instance({
+    url: "/budgets",
+    headers: { Authorization: `Bearer ${import.meta.env.VITE_TEST_TOKEN}` },
   });
-}
+  return data;
+};
 export default function App() {
   const [categories, setCategories] = useState([]);
-
   useEffect(() => {
-    data().then((val) => {
-      setCategories(val);
-    });
+    try {
+      getData().then(
+        (res) => {
+          let budgets = res?.data?.data;
+          setCategories(budgets);
+        },
+        [categories],
+      );
+    } catch (error) {
+      console.log(error);
+    }
   }, []);
   return (
     <div className=" relative h-full flex flex-col lg:flex-row gap-5">

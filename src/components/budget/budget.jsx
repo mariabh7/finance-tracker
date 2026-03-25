@@ -9,13 +9,22 @@ import { CategoriesData } from "../../App";
 import { Categories } from "../data/data";
 import { Suspense, useEffect, useState } from "react";
 import ProgressBar from "../ui/Progress";
-function BudgetOverView({ Budgets = [] }) {
-  const TotalBudget = Budgets?.map((item) => item.total)?.reduce(
-    (sum, next) => sum + next,
-  );
-  const TotalSpent = Budgets?.map((item) => item.paid)?.reduce(
-    (sum, next) => sum + next,
-  );
+import { instance } from "../data/data";
+function BudgetOverView({ Budgets }) {
+  const bud = useContext(CategoriesData);
+  let TotalBudget = 0;
+  let TotalSpent = 0;
+  try {
+    TotalBudget = bud
+      ?.map((item) => item.Limit)
+      ?.reduce((sum, next) => sum + next);
+    TotalSpent = bud
+      ?.map((item) => item.UsedAmount)
+      ?.reduce((sum, next) => sum + next);
+    console.log(bud);
+  } catch (err) {
+    console.log(bud);
+  }
 
   const pers =
     TotalSpent > TotalBudget ? 100 : (TotalSpent * 100) / TotalBudget;
@@ -97,18 +106,18 @@ function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
     setOpen(true);
   }
   const Percentage =
-    Sitem?.paid > Sitem?.total
+    Sitem?.UsedAmount > Sitem?.Limit
       ? 100
-      : ((Sitem?.paid * 100) / Sitem?.total).toFixed(1);
+      : ((Sitem?.UsedAmount * 100) / Sitem?.Limit).toFixed(1);
   return (
     <li className="w-full rounded-2xl border-2 border-gray-200 p-4">
       <div className="flex justify-between items-center">
         <div className="space-y-1.5 w-[50%] ">
           <h1 className="capitalize text-base md:text-lg font-medium">
-            {Sitem.item}
+            {Sitem.Category}
           </h1>
           <p className="text-gray-500 text-[14px] first-letter:uppercase">
-            {Sitem.period} budget{" "}
+            {Sitem.Period} budget{" "}
           </p>
         </div>
         <div className="flex gap-2 justify-start">
@@ -131,13 +140,14 @@ function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
       <div className="flex mt-4 flex-col gap-2 justify-start">
         <div className="flex justify-between">
           <p className="capitalize text-[14px] md:text-base ">
-            ${Sitem.paid} / ${Sitem.total}
+            ${Sitem.UsedAmount} / ${Sitem.Limit}
           </p>
           <p className="text-black text-[14px] md:text-base">{Percentage}%</p>
         </div>
         <ProgressBar progress={Percentage} />
         <span className="text-gray-500 text-[14px] self-end">
-          ${Sitem.paid > Sitem.total ? 0 : Sitem.total - Sitem.paid} remaining
+          ${Sitem.UsedAmount > Sitem.Limit ? 0 : Sitem.total - Sitem.UsedAmount}{" "}
+          remaining
         </span>
       </div>
     </li>
@@ -182,7 +192,7 @@ function BudgetCategories({ budgets, setopen, setCurrent, setconfig }) {
           <ul className="flex flex-col  gap-6">
             {b?.map((Category) => (
               <SingleItem
-                key={Category.itemId}
+                key={Category.id}
                 Sitem={Category}
                 setOpen={setopen}
                 setCurrent={setCurrent}

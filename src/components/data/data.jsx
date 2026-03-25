@@ -1,3 +1,10 @@
+import axios from "axios";
+import { configDotenv } from "dotenv";
+export const instance = axios.create({
+  baseURL: import.meta.env.VITE_BASE_URL,
+  timeout: 1000,
+});
+
 export const Categories = [
   {
     item: "food and dining",
