@@ -73,19 +73,19 @@ export default function EditBudgetElement({
   setOpen,
   actualElement,
 }) {
-  const [category, setCategory] = useState(actualElement?.item || {});
-  const [limit, setLimit] = useState(actualElement?.total || 0);
-  const [period, setPeriod] = useState(actualElement?.period || "");
+  const [category, setCategory] = useState(actualElement?.Category || {});
+  const [limit, setLimit] = useState(actualElement?.Limit || 0);
+  const [period, setPeriod] = useState(actualElement?.Period || "");
   useEffect(() => {
-    setCategory(actualElement?.item || "");
-    setLimit(actualElement?.total || 0);
-    setPeriod(actualElement?.period || "");
+    setCategory(actualElement?.Category || "");
+    setLimit(actualElement?.Limit || 0);
+    setPeriod(actualElement?.Period || "");
   }, [actualElement]);
   const handleSubmit = (formData) => {
     console.log(
       formData.get("number"),
       formData.get("Budget Category"),
-      formData.get("Period")
+      formData.get("Period"),
     );
     setOpen(false);
   };
@@ -173,7 +173,7 @@ export function EditTransactions({
       formData.get("number"),
       formData.get("type"),
       formData.get("category"),
-      formData.get("desc")
+      formData.get("desc"),
     );
 
     setModalOpen(false);

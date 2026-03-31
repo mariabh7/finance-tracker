@@ -10,7 +10,7 @@ import { Categories } from "../data/data";
 import { Suspense, useEffect, useState } from "react";
 import ProgressBar from "../ui/Progress";
 import { instance } from "../data/data";
-function BudgetOverView({ Budgets }) {
+function BudgetOverView({}) {
   const bud = useContext(CategoriesData);
   let TotalBudget = 0;
   let TotalSpent = 0;
@@ -153,11 +153,12 @@ function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
     </li>
   );
 }
-function BudgetCategories({ budgets, setopen, setCurrent, setconfig }) {
+function BudgetCategories({ setopen, setCurrent, setconfig }) {
   const [b, setb] = useState([]);
   const bud = useContext(CategoriesData);
   useEffect(() => {
     setb(bud);
+    console.log(bud);
   }, [bud]);
   const handleAdding = () => {
     setCurrent({});
@@ -212,10 +213,9 @@ export default function Budget() {
   // asyn fun to retrive data from back
   return (
     <>
-      <BudgetOverView Budgets={Categories} />
+      <BudgetOverView />
       <Suspense fallback={<h2>loading content</h2>}>
         <BudgetCategories
-          budgets={Categories}
           setopen={setOpen}
           setCurrent={setCurrent}
           setconfig={setConfig}
