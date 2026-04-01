@@ -2,7 +2,7 @@ import Card from "../ui/card";
 import { edit } from "../ui/edit";
 import { trash } from "../ui/remove";
 import { plus } from "../ui/addIcon";
-import TableBody, { tableBodyClasses } from "@mui/material/TableBody";
+import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableCell from "@mui/material/TableCell";
@@ -12,10 +12,11 @@ import { Transaction } from "../data/data";
 import { circleArrowUp } from "../ui/arrowup";
 import { circleArrowDown } from "../ui/arrowdown";
 import { getTotal } from "../data/data";
-import { updateBudget } from "../data/data";
-import { useReducer, useState } from "react";
+import { useContext, useReducer, useState } from "react";
+import { TransactionsData } from "../../App";
+import { deleteTr } from "../../apis/trans";
 import { EditTransactions } from "../ui/edit";
-function TransactionsTable({ setopen, Transdispatch }) {
+function TransactionsTable({ data, setopen, Transdispatch }) {
   const handleEditting = (item) => {
     Transdispatch({
       type: "edit transaction ",
@@ -38,8 +39,9 @@ function TransactionsTable({ setopen, Transdispatch }) {
             </TableRow>
           </TableHead>
           <TableBody sx={{ width: "100%" }}>
-            {Transaction.map((trans) => {
-              const CurrentType = trans.type === "income" ? true : false;
+            {data?.map((trans) => {
+              const CurrentType = trans.Type === "INCOME" ? true : false;
+              const DateofTr = new Date(trans?.Date);
               return (
                 <TableRow key={trans.id} className="capitalize">
                   <TableCell>
@@ -49,7 +51,7 @@ function TransactionsTable({ setopen, Transdispatch }) {
                       }`}
                     >
                       {CurrentType ? circleArrowUp() : circleArrowDown()}
-                      {trans.type}
+                      {trans.Type}
                     </div>
                   </TableCell>
                   <TableCell>
@@ -58,12 +60,12 @@ function TransactionsTable({ setopen, Transdispatch }) {
                         CurrentType ? "text-green-700" : "text-red-600"
                       }
                     >
-                      ${trans.amount}
+                      ${trans.Amount}
                     </span>
                   </TableCell>
-                  <TableCell>{trans.category}</TableCell>
-                  <TableCell>{trans.description}</TableCell>
-                  <TableCell>{trans.date}</TableCell>
+                  <TableCell>{trans.Category}</TableCell>
+                  <TableCell>{trans.Description}</TableCell>
+                  <TableCell>{`${DateofTr.getFullYear()}-${String(DateofTr.getMonth() + 1).padStart(2, "0")}-${String(DateofTr.getDate())}`}</TableCell>
                   <TableCell>
                     {" "}
                     <div className="flex gap-2 justify-start">
@@ -75,7 +77,14 @@ function TransactionsTable({ setopen, Transdispatch }) {
                       >
                         {edit()}
                       </button>
-                      <button className="Buttons">{trash()}</button>
+                      <button
+                        onClick={() => {
+                          deleteTr(trans.id);
+                        }}
+                        className="Buttons"
+                      >
+                        {trash()}
+                      </button>
                     </div>
                   </TableCell>
                 </TableRow>
@@ -106,6 +115,7 @@ function configer(e, action) {
 }
 function MainContainer() {
   const [open, setOpens] = useState(false);
+  const transactions = useContext(TransactionsData);
   const initialState = {
     action: "",
     description: "",
@@ -143,7 +153,11 @@ function MainContainer() {
         </div>
       </div>
       <section>
-        <TransactionsTable setopen={setOpens} Transdispatch={dispatch} />
+        <TransactionsTable
+          data={transactions}
+          setopen={setOpens}
+          Transdispatch={dispatch}
+        />
         <EditTransactions
           action={TransConfig.action}
           description={TransConfig.description}

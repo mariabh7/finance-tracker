@@ -8,6 +8,7 @@ import { Availablecategories, Categories, Plans } from "../data/data";
 import CloseDiagonale from "./close";
 import TextField from "@mui/material/TextField";
 import { addBudget, EditBudget } from "../../apis/budgets";
+import { addTr, editTr } from "../../apis/trans";
 export const edit = () => {
   return (
     <svg
@@ -163,25 +164,37 @@ export function EditTransactions({
   setModalOpen,
   actualElement,
 }) {
-  const [type, setType] = useState(actualElement?.type || "income");
-  const [amount, setAmount] = useState(actualElement?.amount || 0);
-  const [category, setCategory] = useState(actualElement?.category || "");
-  const [desc, setDesc] = useState(actualElement?.description || "");
+  const [type, setType] = useState(actualElement?.Type || "income");
+  const [amount, setAmount] = useState(actualElement?.Amount || 0);
+  const [category, setCategory] = useState(actualElement?.Category || "");
+  const [desc, setDesc] = useState(actualElement?.Description || "");
   useEffect(() => {
-    setType(actualElement?.type || "income");
-    setAmount(actualElement?.amount || 0);
-    setCategory(actualElement?.category || "");
-    setDesc(actualElement?.description || "");
+    setType(actualElement?.Type || "income");
+    setAmount(actualElement?.Amount || 0);
+    setCategory(actualElement?.Category || "");
+    setDesc(actualElement?.Description || "");
   }, [actualElement]);
 
-  const handleSubmit = (formData) => {
+  const handleSubmit = async (formData) => {
     console.log(
       formData.get("number"),
       formData.get("type"),
       formData.get("category"),
       formData.get("desc"),
     );
-
+    action == "edit transaction"
+      ? await editTr(actualElement?.id, {
+          Type: formData.get("type"),
+          Category: formData.get("category"),
+          Amount: parseInt(formData.get("number")),
+          Description: formData.get("desc"),
+        })
+      : await addTr({
+          Type: formData.get("type"),
+          Category: formData.get("category"),
+          Amount: parseInt(formData.get("number")),
+          Description: formData.get("desc"),
+        });
     setModalOpen(false);
   };
 
@@ -219,7 +232,7 @@ export function EditTransactions({
           <div className="grid grid-cols-2 gap-5">
             <CustimizedSelect
               value={type}
-              option={["income", "expense"]}
+              option={["INCOME", "EXPENSE"]}
               role={"type"}
               onChange={setType}
             />
