@@ -7,7 +7,7 @@ import Autocomplete from "@mui/material/Autocomplete";
 import { Availablecategories, Categories, Plans } from "../data/data";
 import CloseDiagonale from "./close";
 import TextField from "@mui/material/TextField";
-import { EditBudget } from "../../apis/budgets";
+import { addBudget, EditBudget } from "../../apis/budgets";
 export const edit = () => {
   return (
     <svg
@@ -82,17 +82,17 @@ export default function EditBudgetElement({
     setPeriod(actualElement?.Period || "");
   }, [actualElement]);
   const handleSubmit = async (formData) => {
-    console.log(
-      formData.get("number"),
-      formData.get("Budget Category"),
-      formData.get("Period"),
-    );
-    const done = EditBudget(actualElement?.id, {
-      Category: formData.get("Budget Category"),
-      Limit: parseInt(formData.get("number")),
-      Period: formData.get("Period"),
-    });
-    console.log(done);
+    action == "update budget"
+      ? await EditBudget(actualElement?.id, {
+          Category: formData.get("Budget Category"),
+          Limit: parseInt(formData.get("number")),
+          Period: formData.get("Period"),
+        })
+      : await addBudget({
+          Category: formData.get("Budget Category"),
+          Limit: parseInt(formData.get("number")),
+          Period: formData.get("Period"),
+        });
     setOpen(false);
   };
 

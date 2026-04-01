@@ -1,15 +1,14 @@
 import { chartArcs } from "../ui/chartArcs";
-import LinearProgress from "@mui/material/LinearProgress";
+
 import Snackbar from "@mui/material/Snackbar";
 import { plus } from "../ui/addIcon";
 import EditBudgetElement, { edit } from "../ui/edit";
 import { trash } from "../ui/remove";
 import { useContext } from "react";
 import { CategoriesData } from "../../App";
-import { Categories } from "../data/data";
+import { deleteBudget } from "../../apis/budgets";
 import { Suspense, useEffect, useState } from "react";
 import ProgressBar from "../ui/Progress";
-import { instance } from "../data/data";
 function BudgetOverView({}) {
   const bud = useContext(CategoriesData);
   let TotalBudget = 0;
@@ -74,9 +73,9 @@ function BudgetOverView({}) {
   );
 }
 function DeleteButton({ openSnack, setOpensnack, item }) {
-  const HandleDeleting = () => {
+  const HandleDeleting = async () => {
+    const done = await deleteBudget(item.id);
     setOpensnack(true);
-    Categories.splice(Categories?.indexOf(item), 1);
     setTimeout(() => {
       setOpensnack(false);
     }, 2000);
@@ -146,7 +145,7 @@ function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
         </div>
         <ProgressBar progress={Percentage} />
         <span className="text-gray-500 text-[14px] self-end">
-          ${Sitem.UsedAmount > Sitem.Limit ? 0 : Sitem.total - Sitem.UsedAmount}{" "}
+          ${Sitem.UsedAmount > Sitem.Limit ? 0 : Sitem.Limit - Sitem.UsedAmount}{" "}
           remaining
         </span>
       </div>
