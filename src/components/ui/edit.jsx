@@ -176,12 +176,6 @@ export function EditTransactions({
   }, [actualElement]);
 
   const handleSubmit = async (formData) => {
-    console.log(
-      formData.get("number"),
-      formData.get("type"),
-      formData.get("category"),
-      formData.get("desc"),
-    );
     action == "edit transaction"
       ? await editTr(actualElement?.id, {
           Type: formData.get("type"),
