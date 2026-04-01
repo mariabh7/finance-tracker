@@ -6,9 +6,11 @@ export const getAllBudgets = async () => {
   });
   return data?.data;
 };
-export const EditBudget = async () => {
+export const EditBudget = async (id, dataIn) => {
   const data = await instance({
-    url: "/budgets/:id",
+    method: "put",
+    data: dataIn,
+    url: `/budgets/${id}`,
     headers: { Authorization: `Bearer ${import.meta.env.VITE_TEST_TOKEN}` },
   });
   return data?.data;
