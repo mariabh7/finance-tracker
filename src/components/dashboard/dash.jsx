@@ -1,11 +1,12 @@
 import { Transaction } from "../data/data";
 import Card from "../ui/card";
-import { Categories } from "../data/data";
 import { getTotal } from "../data/data";
 import ProgressBar from "../ui/Progress";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { BarChart } from "@mui/x-charts";
+import { CategoriesData } from "../../App";
 import HeadingContent from "../ui/CardHeader";
+import { useContext } from "react";
 function BasicChart() {
   return (
     <div className="OuterStyle flex flex-col gap-5">
@@ -24,7 +25,7 @@ function BasicChart() {
     </div>
   );
 }
-export function BasicPie() {
+export function BasicPie({ data }) {
   return (
     <div className="OuterStyle flex flex-col gap-5">
       <HeadingContent
@@ -35,10 +36,10 @@ export function BasicPie() {
         hideLegend={true}
         series={[
           {
-            data: Categories.map((item) => ({
-              id: item.itemId,
-              value: item.paid,
-              label: item.item,
+            data: data.map((item) => ({
+              id: item.id,
+              value: item.UsedAmount,
+              label: item.Category,
             })),
           },
         ]}
@@ -49,28 +50,28 @@ export function BasicPie() {
     </div>
   );
 }
-function VisualReview() {
+function VisualReview({ data }) {
   return (
     <section className="grid  gap-5 grid-cols-1 md:grid-cols-2">
       <BasicChart />
-      <BasicPie />
+      <BasicPie data={data} />
     </section>
   );
 }
 function ItemToSHow({ CurrentItem }) {
   const Percentage =
-    CurrentItem?.paid > CurrentItem?.total
+    CurrentItem?.UsedAmount > CurrentItem?.Limit
       ? 100
-      : ((CurrentItem?.paid * 100) / CurrentItem?.total).toFixed(1);
+      : ((CurrentItem?.UsedAmount * 100) / CurrentItem?.Limit).toFixed(1);
   return (
     <li className="w-full ">
       <div className="flex justify-between items-center">
         <div className="flex justify-between gap-0 w-[100%] ">
           <h1 className="capitalize text-base  font-medium">
-            {CurrentItem.item}
+            {CurrentItem.Category}
           </h1>
           <p className="capitalize text-gray-400 text-[13px] md:text-base ">
-            ${CurrentItem.paid} / ${CurrentItem.total}
+            ${CurrentItem.UsedAmount} / ${CurrentItem.Limit}
           </p>
         </div>
       </div>
@@ -83,7 +84,7 @@ function ItemToSHow({ CurrentItem }) {
     </li>
   );
 }
-function BudgetView() {
+function BudgetView({ data }) {
   return (
     <section className="OuterStyle">
       <HeadingContent
@@ -91,16 +92,18 @@ function BudgetView() {
         description={" track your spending against your budget"}
       />
       <ul className="flex flex-col mt-10 gap-6">
-        {Categories?.map((Category) => (
-          <ItemToSHow key={Category.itemId} CurrentItem={Category} />
+        {data?.map((Category) => (
+          <ItemToSHow key={Category.id} CurrentItem={Category} />
         ))}
       </ul>
     </section>
   );
 }
 function DashBoard() {
+  const Categories = useContext(CategoriesData);
   const TotalIncome = getTotal(Transaction, "income");
   const TotalExpenses = getTotal(Transaction, "expense");
+
   return (
     <>
       <header
@@ -129,8 +132,8 @@ function DashBoard() {
         />
       </header>
       <main className="flex flex-col gap-10 mb-4 lg:mb-0 ">
-        <VisualReview />
-        <BudgetView />
+        <VisualReview data={Categories} />
+        <BudgetView data={Categories} />
       </main>
     </>
   );
