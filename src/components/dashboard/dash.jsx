@@ -4,7 +4,7 @@ import { getTotal } from "../data/data";
 import ProgressBar from "../ui/Progress";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { BarChart } from "@mui/x-charts";
-import { CategoriesData } from "../../App";
+import { CategoriesData, TransactionsData } from "../../App";
 import HeadingContent from "../ui/CardHeader";
 import { useContext } from "react";
 function BasicChart() {
@@ -15,11 +15,8 @@ function BasicChart() {
         description={"monthly comparison over the last 6 months"}
       />
       <BarChart
-        xAxis={[{ data: ["january", "february", "march", "april", "may"] }]}
-        series={[
-          { data: [400, 600, 4500, 3000, 300] },
-          { data: [900, 4000, 30, 3999, 2000] },
-        ]}
+        xAxis={[{ data: ["january"] }]}
+        series={[{ data: [400] }, { data: [900] }]}
         height={300}
       />
     </div>
@@ -38,7 +35,7 @@ export function BasicPie({ data }) {
           {
             data: data.map((item) => ({
               id: item.id,
-              value: item.UsedAmount,
+              value: item.Amount,
               label: item.Category,
             })),
           },
@@ -101,9 +98,12 @@ function BudgetView({ data }) {
 }
 function DashBoard() {
   const Categories = useContext(CategoriesData);
+  const transactions = useContext(TransactionsData);
+  const ExpenseCategories = transactions?.filter(
+    (item) => item.Type === "EXPENSE",
+  );
   const TotalIncome = getTotal(Transaction, "income");
   const TotalExpenses = getTotal(Transaction, "expense");
-
   return (
     <>
       <header
@@ -132,7 +132,7 @@ function DashBoard() {
         />
       </header>
       <main className="flex flex-col gap-10 mb-4 lg:mb-0 ">
-        <VisualReview data={Categories} />
+        <VisualReview data={ExpenseCategories} />
         <BudgetView data={Categories} />
       </main>
     </>

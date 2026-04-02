@@ -85,12 +85,12 @@ export default function EditBudgetElement({
   const handleSubmit = async (formData) => {
     action == "update budget"
       ? await EditBudget(actualElement?.id, {
-          Category: formData.get("Budget Category"),
+          Category: formData.get("category"),
           Limit: parseInt(formData.get("number")),
           Period: formData.get("Period"),
         })
       : await addBudget({
-          Category: formData.get("Budget Category"),
+          Category: formData.get("category"),
           Limit: parseInt(formData.get("number")),
           Period: formData.get("Period"),
         });
@@ -128,11 +128,13 @@ export default function EditBudgetElement({
         }}
       >
         <form className="mt-5 flex flex-col gap-5" action={handleSubmit}>
-          <CustimizedSelect
+          <TextField
+            id="outlined-basic"
+            label="category"
+            name="category"
             value={category}
-            option={Availablecategories}
-            role={"Budget Category"}
-            onChange={setCategory}
+            onChange={(e) => setCategory(e.target.value)}
+            variant="outlined"
           />
           <NumberInput
             title={"Budget Limit"}
@@ -169,7 +171,7 @@ export function EditTransactions({
   const [category, setCategory] = useState(actualElement?.Category || "");
   const [desc, setDesc] = useState(actualElement?.Description || "");
   useEffect(() => {
-    setType(actualElement?.Type || "income");
+    setType(actualElement?.Type || "INCOME");
     setAmount(actualElement?.Amount || 0);
     setCategory(actualElement?.Category || "");
     setDesc(actualElement?.Description || "");
@@ -232,11 +234,19 @@ export function EditTransactions({
             />
             <NumberInput title={"amount"} value={amount} onChange={setAmount} />
           </div>
-          <CustimizedSelect
+          {/* <CustimizedSelect
             value={category}
             option={Availablecategories}
             role={"category"}
             onChange={setCategory}
+          /> */}
+          <TextField
+            id="outlined-basic"
+            label="category"
+            name="category"
+            value={category}
+            onChange={(e) => setCategory(e.target.value)}
+            variant="outlined"
           />
           <TextField
             id="outlined-basic"
