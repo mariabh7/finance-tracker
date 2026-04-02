@@ -4,7 +4,12 @@ import { getTotal } from "../data/data";
 import ProgressBar from "../ui/Progress";
 import { PieChart } from "@mui/x-charts/PieChart";
 import { BarChart } from "@mui/x-charts";
-import { CategoriesData, TransactionsData } from "../../App";
+import {
+  CategoriesData,
+  MonthlyData,
+  MonthlyStatistics,
+  TransactionsData,
+} from "../../App";
 import HeadingContent from "../ui/CardHeader";
 import { useContext } from "react";
 function BasicChart() {
@@ -99,11 +104,19 @@ function BudgetView({ data }) {
 function DashBoard() {
   const Categories = useContext(CategoriesData);
   const transactions = useContext(TransactionsData);
+  const monthlydata = useContext(MonthlyData);
+  const monthlystats = useContext(MonthlyStatistics);
   const ExpenseCategories = transactions?.filter(
     (item) => item.Type === "EXPENSE",
   );
-  const TotalIncome = getTotal(Transaction, "income");
-  const TotalExpenses = getTotal(Transaction, "expense");
+  const {
+    cureentIncome,
+    currentMonth,
+    currentExpense,
+    currentSavings,
+    previousSavings,
+    percentageChange,
+  } = monthlystats;
   return (
     <>
       <header
@@ -112,17 +125,17 @@ function DashBoard() {
       >
         <Card
           title={"total income"}
-          number={TotalIncome}
-          description={"+12% from last month"}
+          number={cureentIncome}
+          description={`${percentageChange} from last month`}
         />
         <Card
           title={"total expense"}
-          number={TotalExpenses}
+          number={currentExpense}
           description={"-8% from last month"}
         />
         <Card
           title={"net savings"}
-          number={TotalIncome - TotalExpenses}
+          number={currentSavings}
           description={"24.0% saving rate"}
         />
         <Card

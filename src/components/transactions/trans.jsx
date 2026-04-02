@@ -13,7 +13,7 @@ import { circleArrowUp } from "../ui/arrowup";
 import { circleArrowDown } from "../ui/arrowdown";
 import { getTotal } from "../data/data";
 import { useContext, useReducer, useState } from "react";
-import { TransactionsData } from "../../App";
+import { TransactionsData, MonthlyStatistics } from "../../App";
 import { deleteTr } from "../../apis/trans";
 import { EditTransactions } from "../ui/edit";
 function TransactionsTable({ data, setopen, Transdispatch }) {
@@ -170,23 +170,27 @@ function MainContainer() {
   );
 }
 function Transactions() {
-  const TotalIncome = getTotal(Transaction, "income");
-  const TotalExpenses = getTotal(Transaction, "expense");
+  const monthlystats = useContext(MonthlyStatistics);
+  const { cureentIncome, currentExpense, currentSavings } = monthlystats;
   return (
     <>
       <header
         data-slot="transaction-header"
         className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
       >
-        <Card title={"total income"} number={TotalIncome} description={null} />
+        <Card
+          title={"total income"}
+          number={cureentIncome}
+          description={null}
+        />
         <Card
           title={"total expense"}
-          number={TotalExpenses}
+          number={currentExpense}
           description={null}
         />
         <Card
           title={"total balence"}
-          number={TotalIncome - TotalExpenses}
+          number={currentSavings}
           description={null}
         />
       </header>

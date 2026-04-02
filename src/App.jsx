@@ -3,18 +3,27 @@ import { Outlet } from "react-router-dom";
 import Navigation from "./components/menu/menu.jsx";
 export const CategoriesData = createContext();
 export const TransactionsData = createContext();
+export const MonthlyData = createContext();
+export const MonthlyStatistics = createContext();
 import { getAllBudgets } from "./apis/budgets.jsx";
 import { getAllTrs } from "./apis/trans.jsx";
+import { getIncomesAndExpenses, getStatistics } from "./apis/dash.jsx";
 export default function App() {
   const [categories, setCategories] = useState([]);
   const [transactions, settransactions] = useState([]);
+  const [monthlyData, setmonthlyData] = useState([]);
+  const [monthlyStatsData, setmonthlyStatsData] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await getAllBudgets();
-        const res2 = await getAllTrs();
-        setCategories(res?.data);
-        settransactions(res2?.data);
+        const Budgets = await getAllBudgets();
+        const transactions = await getAllTrs();
+        const IncomesAndExpenses = await getIncomesAndExpenses();
+        const stats = await getStatistics();
+        setCategories(Budgets?.data);
+        settransactions(transactions?.data);
+        setmonthlyData(IncomesAndExpenses?.data);
+        setmonthlyStatsData(stats?.data);
       } catch (error) {
         console.log(error);
       }
@@ -28,8 +37,12 @@ export default function App() {
       <div className="py-5 mb-5 lg:mb-0 lg:py-10 w-full px-5 h-screen lg:overflow-y-scroll flex flex-col justify-start gap-10">
         <CategoriesData.Provider value={categories}>
           <TransactionsData.Provider value={transactions}>
-            {" "}
-            <Outlet />
+            <MonthlyData.Provider value={monthlyData}>
+              <MonthlyStatistics.Provider value={monthlyStatsData}>
+                {" "}
+                <Outlet />
+              </MonthlyStatistics.Provider>{" "}
+            </MonthlyData.Provider>{" "}
           </TransactionsData.Provider>
         </CategoriesData.Provider>
       </div>
