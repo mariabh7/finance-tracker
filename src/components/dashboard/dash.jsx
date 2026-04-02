@@ -13,6 +13,14 @@ import {
 import HeadingContent from "../ui/CardHeader";
 import { useContext } from "react";
 function BasicChart() {
+  const monthlyData = useContext(MonthlyData);
+  const data = monthlyData?.map((item) => {
+    return {
+      month: item.month || "april ",
+      income: item?.monthlyIncome || 10,
+      expenses: item?.monthlyExpense || 20,
+    };
+  });
   return (
     <div className="OuterStyle flex flex-col gap-5">
       <HeadingContent
@@ -20,8 +28,11 @@ function BasicChart() {
         description={"monthly comparison over the last 6 months"}
       />
       <BarChart
-        xAxis={[{ data: ["january"] }]}
-        series={[{ data: [400] }, { data: [900] }]}
+        xAxis={[{ data: data.map((item) => item.month) }]}
+        series={[
+          { data: data.map((item) => item.income) },
+          { data: data.map((item) => item.expenses) },
+        ]}
         height={300}
       />
     </div>

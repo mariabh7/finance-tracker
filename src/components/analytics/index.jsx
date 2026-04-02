@@ -1,12 +1,14 @@
 import { LineChart } from "@mui/x-charts";
-import { SparkLineChart } from "@mui/x-charts";
-import Stack from "@mui/material/Stack";
 import Card from "../ui/card";
 import ProgressBar from "../ui/Progress";
 import { useState } from "react";
 import HeadingContent from "../ui/CardHeader";
+import { MonthlyData } from "../../App";
+import { useContext } from "react";
 // savings rate trend component
 function SpendingsOverview() {
+  const monthlyData = useContext(MonthlyData);
+
   const monthlysaving = [
     { month: "Jan", savings: 2500 },
     { month: "Feb", savings: 2000 },
@@ -84,14 +86,14 @@ function SetGoal() {
 }
 // financial monthly review
 function FinancialMonthsOverview() {
-  const monthlyData = [
-    { month: "Jan", income: 4000, expenses: 2400 },
-    { month: "Feb", income: 3000, expenses: 1398 },
-    { month: "Mar", income: 5000, expenses: 3800 },
-    { month: "Apr", income: 4500, expenses: 3908 },
-    { month: "May", income: 3800, expenses: 2800 },
-    { month: "Jun", income: 4200, expenses: 3200 },
-  ];
+  const monthlyData = useContext(MonthlyData);
+  const data = monthlyData?.map((item) => {
+    return {
+      month: item.month || "april ",
+      income: item?.monthlyIncome || 10,
+      expenses: item?.monthlyExpense || 20,
+    };
+  });
   return (
     <div className="OuterStyle">
       <HeadingContent
@@ -102,17 +104,17 @@ function FinancialMonthsOverview() {
         xAxis={[
           {
             scaleType: "band",
-            data: monthlyData.map((item) => item.month),
+            data: data.map((item) => item.month),
             grid: true,
           },
         ]}
         series={[
           {
-            data: monthlyData.map((item) => item.income),
+            data: data.map((item) => item.income),
             color: "#10b981",
           },
           {
-            data: monthlyData.map((item) => item.expenses),
+            data: data.map((item) => item.expenses),
             color: "#ef4444",
           },
         ]}
