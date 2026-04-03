@@ -105,9 +105,13 @@ function BudgetView({ data }) {
         description={" track your spending against your budget"}
       />
       <ul className="flex flex-col mt-10 gap-6">
-        {data?.map((Category) => (
-          <ItemToSHow key={Category.id} CurrentItem={Category} />
-        ))}
+        {data ? (
+          data?.map((Category) => (
+            <ItemToSHow key={Category.id} CurrentItem={Category} />
+          ))
+        ) : (
+          <h2>no budgets yet</h2>
+        )}
       </ul>
     </section>
   );
@@ -136,17 +140,17 @@ function DashBoard() {
       >
         <Card
           title={"total income"}
-          number={cureentIncome}
-          description={`${percentageChange} from last month`}
+          number={cureentIncome || 0}
+          description={`${percentageChange || 0} from last month`}
         />
         <Card
           title={"total expense"}
-          number={currentExpense}
+          number={currentExpense || 0}
           description={"-8% from last month"}
         />
         <Card
           title={"net savings"}
-          number={currentSavings}
+          number={currentSavings || 0}
           description={"24.0% saving rate"}
         />
         <Card

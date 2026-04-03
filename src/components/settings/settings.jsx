@@ -34,7 +34,6 @@ const settings = () => {
           // sx={{ width: "40%" }}
           value={"software engineer"}
           label={"Your job"}
-          slotProps={{ readOnly: true }}
         />
         <TextField
           // sx={{ width: "40%" }}
@@ -44,7 +43,7 @@ const settings = () => {
         />
         <TextField
           // sx={{ width: "40%" }}
-          value={"algeriar"}
+          value={"algeria"}
           label={"country"}
           slotProps={{ readOnly: true }}
         />

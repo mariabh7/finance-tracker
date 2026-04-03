@@ -180,17 +180,17 @@ function Transactions() {
       >
         <Card
           title={"total income"}
-          number={cureentIncome}
+          number={cureentIncome || 0}
           description={null}
         />
         <Card
           title={"total expense"}
-          number={currentExpense}
+          number={currentExpense || 0}
           description={null}
         />
         <Card
           title={"total balence"}
-          number={currentSavings}
+          number={currentSavings || 0}
           description={null}
         />
       </header>

@@ -1,18 +1,21 @@
 import { createContext, useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 import Navigation from "./components/menu/menu.jsx";
+import { useNavigate } from "react-router-dom";
 export const CategoriesData = createContext();
 export const TransactionsData = createContext();
 export const MonthlyData = createContext();
 export const MonthlyStatistics = createContext();
 import { getAllBudgets } from "./apis/budgets.jsx";
 import { getAllTrs } from "./apis/trans.jsx";
-import { getIncomesAndExpenses, getStatistics } from "./apis/dash.jsx";
+import { getIncomesAndExpenses, getStatistics } from "./apis/monthlyData.jsx";
 export default function App() {
   const [categories, setCategories] = useState([]);
   const [transactions, settransactions] = useState([]);
   const [monthlyData, setmonthlyData] = useState([]);
   const [monthlyStatsData, setmonthlyStatsData] = useState([]);
+  const [accessToken, setAccessToken] = useState(null); // store access token in memory
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       try {

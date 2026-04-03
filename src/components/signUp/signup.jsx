@@ -6,10 +6,23 @@ import { Link } from "react-router-dom";
 import useCheckInputs from "../../hooks/authentication";
 export function SignUpForm() {
   const [check, useCheck] = useCheckInputs();
+  const navigate = useNavigate();
+  const Register = (e, formData) => {
+    e.preventDefault();
+    useCheck(e, "signup");
+    const Name = formData.get("name");
+    const Email = formData.get("email");
+    const job = formData.get("job");
+    const password = formData.get("password");
+    check.length === 0 && console.log(Name, Email, job, password);
+  };
   return (
     <form
       className="flex flex-col gap-2   ourform"
-      onSubmit={(e) => useCheck(e, "signup")}
+      onSubmit={(e) => {
+        const formData = new FormData(e.target);
+        Register(e, formData);
+      }}
     >
       <div className="single-input">
         <label htmlFor="name">name</label>
@@ -47,6 +60,7 @@ export function SignUpForm() {
       <div className="single-input">
         <label htmlFor="password">password</label>
         <input
+          type="text"
           name="password"
           id="password"
           placeholder="enter your password"

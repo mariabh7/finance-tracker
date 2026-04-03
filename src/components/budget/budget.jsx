@@ -26,7 +26,7 @@ function BudgetOverView({}) {
   }
 
   const pers =
-    TotalSpent > TotalBudget ? 100 : (TotalSpent * 100) / TotalBudget;
+    TotalSpent > TotalBudget ? 100 : (TotalSpent * 100) / TotalBudget || 0;
   const color = pers <= 79 ? "text-green-600" : "text-amber-600";
   return (
     <header className="OuterStyle flex flex-col justify-start gap-6 md:gap-10">
@@ -187,7 +187,10 @@ function BudgetCategories({ setopen, setCurrent, setconfig }) {
       </div>
       <section>
         {b.length === 0 ? (
-          <h2>waiting for data........ </h2>
+          <h2 className="text-center capitalize text-xl">
+            {" "}
+            no budgets to show yet
+          </h2>
         ) : (
           <ul className="flex flex-col  gap-6">
             {b?.map((Category) => (

@@ -25,10 +25,7 @@ const useCheckInputs = () => {
       if (!name) errors.name = "required field";
       if (!job) errors.job = "required field";
     }
-    if (Object.keys(errors).length === 0) {
-      localStorage.setItem("logged", true);
-      navigate(type === "signup" ? "/auth/login" : "/app");
-    } else {
+    if (Object.keys(errors).length !== 0) {
       for (let [key, msg] of Object.entries(errors)) {
         let p = document.createElement("p");
         p.textContent = msg;
