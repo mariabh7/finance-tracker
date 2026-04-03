@@ -89,10 +89,11 @@ export function SignUpForm() {
 }
 export function LogInForm() {
   const [check1, usecheck1] = useCheckInputs();
+  const navigate = useNavigate();
   return (
     <form
       className="flex flex-col gap-2   ourform"
-      onSubmit={(e) => usecheck1(e, "login")}
+      onSubmit={(e) => navigate("/app")}
     >
       <div className="single-input">
         <label htmlFor="email">email</label>
