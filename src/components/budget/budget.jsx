@@ -9,6 +9,7 @@ import { CategoriesData } from "../../App";
 import { deleteBudget } from "../../apis/budgets";
 import { Suspense, useEffect, useState } from "react";
 import ProgressBar from "../ui/Progress";
+import { Categories } from "../data/data";
 function BudgetOverView({}) {
   const bud = useContext(CategoriesData);
   let TotalBudget = 0;
@@ -154,7 +155,8 @@ function SingleItem({ Sitem, setOpen, setCurrent, setDiagonaleConfig }) {
 }
 function BudgetCategories({ setopen, setCurrent, setconfig }) {
   const [b, setb] = useState([]);
-  const bud = useContext(CategoriesData);
+  const bud3 = useContext(CategoriesData);
+  const bud = bud3 || Categories;
   useEffect(() => {
     setb(bud);
     console.log(bud);

@@ -34,7 +34,7 @@ const routes = createBrowserRouter([
   },
   {
     path: "/app",
-
+    errorElement: <ErrorPage />,
     Component: App, // componeent that will render
     children: [
       { index: true, element: <Navigate to="/app/dashboard" /> },
