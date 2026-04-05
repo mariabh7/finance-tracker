@@ -128,7 +128,9 @@ export function LogInForm() {
         type="submit"
         className="px-2 mt-3 py-4 w-full text-base bg-black text-white text-center capitalize rounded-xl cursor-pointer"
       >
-        Log into your account
+        <Link className="underline" to={"/app/dashboard"}>
+          Log into your account
+        </Link>
       </button>
       <div className="flex mt-3 justify-start capitalize gap-2 ">
         <p className="text-gray-400 ">don't have an account?</p>
